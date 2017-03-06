@@ -7,7 +7,7 @@ import org.jdiameter.common.impl.app.s6t.JConfigurationInformationRequestImpl;
 import org.mobicents.diameter.stack.functional.s6t.AbstractClient;
 
 /**
- * Created by odldev on 3/6/17.
+ * Created by Adi Enzel on 3/6/17.
  */
 public class ClientCIR extends AbstractClient{
   protected boolean receivedConfiguratinInfo;
@@ -18,10 +18,31 @@ public class ClientCIR extends AbstractClient{
   }
 
   public void sendConfigurationInfoRequest()  throws Exception {
-    JConfigurationInformationRequest request = new JConfigurationInformationRequestImpl(super.createRequest(this.clientS6tSession, JConfigurationInformationRequest.code));
-      AvpSet reqSet = request.getMessage().getAvps();
+    JConfigurationInformationRequest request =
+            new JConfigurationInformationRequestImpl(super.createRequest(this.clientS6tSession, JConfigurationInformationRequest.code));
+    AvpSet reqSet = request.getMessage().getAvps();
 
-      //reqSet.addAvp(Avp.SERVER_NAME, );
+       //< Configuration-Information-Request > ::=	< Diameter Header: 8388718, REQ, PXY, 16777345 >
+       //< Session-Id > set by SessionImpl.java super.createRequest(
+       //[ DRMP ] ignored optional
+       //{ Auth-Session-State }  set in AbstractClient allways 1
+       //{ Origin-Host }
+       //{ Origin-Realm }
+       //[ Destination-Host ]
+       //{ Destination-Realm } set by SessionImpl.java super.createRequest(
+       //{ User-Identifier }
+    AvpSet userIdentifier = reqSet.addGroupedAvp(Avp.USER_IDENTIFIER, getApplicationId().getVendorId(), true, false);
+    userIdentifier.addAvp(Avp.EXTERNAL_IDENTIFIER, "kuku@stam.com", getApplicationId().getVendorId(), true, false, false);
+
+    userIdentifier.addAvp(Avp.MSISDN, "", getApplicationId().getVendorId(), true, false, false);
+       //[ OC-Supported-Features ]
+      //*[ Supported-Features ]
+      //*[ Monitoring-Event-Configuration ]
+       //[ CIR-Flags ]
+      //*[ AESE-Communication-Pattern ]
+      //*[ Proxy-Info ]
+      //*[ Route-Record ]
+      //*[AVP]
   }
 
 }

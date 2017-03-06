@@ -179,6 +179,13 @@
               </exclusion>
             </exclusions>
           </dependency>
+          <!-- https://mvnrepository.com/artifact/gnu.getopt/java-getopt -->
+          <dependency>
+            <groupId>gnu.getopt</groupId>
+            <artifactId>java-getopt</artifactId>
+            <version>1.0.13</version>
+          </dependency>
+
         </dependencies>
       </plugin>
       <plugin>

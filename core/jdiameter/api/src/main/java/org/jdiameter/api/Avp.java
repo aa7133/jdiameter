@@ -2302,6 +2302,15 @@ public interface Avp extends Wrapper, Serializable {
    */
   int TGPP2_MEID = 1471;
 
+  /**
+   * S6t (3gpp TS 29-336) User-Identifier ::= <AVP header: 3102 10415>
+   */
+  int USER_IDENTIFIER = 3102;
+
+  /**
+   * S6t (3gpp ts 29-336) External-Identifier ::= <AVP header: 3111 10415>
+   */
+  int EXTERNAL_IDENTIFIER = 3111;
 
   /**
    * @return the AVP code.

@@ -106,7 +106,7 @@ public abstract class AbstractClient extends TBase implements ClientS6tSessionLi
     vendorSpecificApplicationId.addAvp(Avp.AUTH_APPLICATION_ID, getApplicationId().getAuthAppId(), true);
     // 0*1{ Acct-Application-Id }
     // { Auth-Session-State }
-    reqSet.addAvp(Avp.AUTH_SESSION_STATE, 1);
+    reqSet.addAvp(Avp.AUTH_SESSION_STATE, 1);  // no session maintiand
     // { Origin-Host }
     reqSet.removeAvp(Avp.ORIGIN_HOST);
     reqSet.addAvp(Avp.ORIGIN_HOST, getClientURI(), true);

@@ -1,6 +1,7 @@
 package org.jdiameter.common.impl.app.s6t;
 
 import org.jdiameter.api.Message;
+import org.jdiameter.api.app.AppSession;
 import org.jdiameter.api.s6t.events.JReportingInformationRequest;
 import org.jdiameter.common.impl.app.AppRequestEventImpl;
 
@@ -14,4 +15,9 @@ public class JReportingInformationRequestImpl extends AppRequestEventImpl implem
     super(msg);
     msg.setRequest(true);
   }
+
+  public JReportingInformationRequestImpl(AppSession session, String destRealm, String destHost) {
+    super(session.getSessions().get(0).createRequest(code, session.getSessionAppId(), destRealm, destHost));
+  }
+
 }

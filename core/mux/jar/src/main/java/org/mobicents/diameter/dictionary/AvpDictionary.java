@@ -43,6 +43,7 @@
 package org.mobicents.diameter.dictionary;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Comparator;
@@ -91,6 +92,8 @@ public class AvpDictionary {
     try {
       fis = new FileInputStream(filename);
       parseDictionary(fis);
+    } catch (FileNotFoundException e) {
+      logger.error("Failed to open FileInputStream", e);
     } finally {
       if (fis != null) {
         try {

@@ -2313,6 +2313,266 @@ public interface Avp extends Wrapper, Serializable {
   int EXTERNAL_IDENTIFIER = 3111;
 
   /**
+   * S6t (3gpp ts 29-336) ESE-Communication-Pattern	3113	8.4.25	Grouped	M,V	No
+   */
+  int ESE_COMMUNICATION_PATTERN = 3113;
+
+  /**
+   * S6t (3gpp ts 29-336) Communication-Pattern-Set	3114	8.4.26	Grouped	M,V No
+   */
+  int COMMUNICATION_PATTERN_SET = 3114;
+
+  /**
+   * S6t (3gpp ts 29-336) Periodic-Communication-Indicator	3115	8.4.27	Unsigned32	M,V	No
+   */
+  int PERIODIC_COMMUNICATION_INDICATOR = 3115;
+
+  /**
+   * S6t (3gpp ts 29-336) Communication-Duration-Time	3116	8.4.28	Unsigned32	M,V				No
+   */
+  int COMMUNICATION_DURATION_TIME = 3116;
+
+  /**
+   * S6t (3gpp ts 29-336) Periodic-time	3117	8.4.29	Unsigned32	M,V				No
+   */
+  int PERIODIC_TIME = 3117;
+
+  /**
+   * S6t (3gpp ts 29-336) Scheduled-Communication-Time	3118	8.4.30	Grouped	M,V	No
+   */
+  int SCHEDULED_COMMUNICATION_TIME = 3118;
+
+  /**
+   * S6t (3gpp ts 29-336) Stationary-Indication	3119	8.4.31	Unsigned32	M,V	No
+   */
+  int STATIONARY_INDICATION = 3119;
+
+  /**
+   * S6t (3gpp ts 29-336) AESE-Communication-Pattern-Config-Status	3120	8.4.32	Grouped	M,V				No
+   */
+  int AESE_COMMUNICATION_PATTEREN_CONFIG_STATUS = 3120;
+
+  /**
+   * S6t (3gpp ts 29-336) AESE-Error-Report	3121	8.4.33	Grouped	M,V				No
+   */
+  int AESE_ERROR_REPORT = 3121;
+
+  /**
+   * S6t (3gpp ts 29-336) Monitoring-Event-Configuration	3122	8.4.2	Grouped	M,V				No
+   */
+  int MONITORING_EVENT_CONFIGURATION = 3122;
+
+  /**
+   * S6t (3gpp ts 29-336) Monitoring-Event-Report	3123	8.4.3	Grouped	M,V				No
+   */
+  int MONITORING_EVENT_REPORT = 3123;
+
+  /**
+   * S6t (3gpp ts 29-336) SCEF-Reference-ID	3124	8.4.4	Unsigned32	M,V				No
+   */
+  int SCEF_REFERENCE_ID = 3124;
+
+  /**
+   * S6t (3gpp ts 29-336) SCEF-ID	3125	8.4.5	DiameterIdentity	M,V				No
+   */
+  int SCEF_ID = 3125;
+
+  /**
+   * S6t (3gpp ts 29-336) SCEF-Reference-ID-for-Deletion	3126	8.4.6	Unsigned32	M,V				No
+   */
+  int SCEF_REFERENCE_ID_FOR_DELETION = 3126;
+
+  /**
+   * S6t (3gpp ts 29-336) Monitoring-Type	3127	8.4.7	Unsigned32	M,V				No
+   */
+  int MONITORING_TYPE = 3127;
+
+  /**
+   * S6t (3gpp ts 29-336) Maximum-Number-of-Reports	3128	8.4.8	Unsigned32	M,V				No
+   */
+  int MAXIMUM_NUMBER_OF_REPORTS = 3128;
+
+  /**
+   * S6t (3gpp ts 29-336) UE-Reachability-Configuration	3129	8.4.9	Grouped	M,V				No
+   */
+  int UE_REACHABILITY_CONFIGURATION = 3129;
+
+  /**
+   * S6t (3gpp TS 29-366) Monitoring-Duration	3130	8.4.10	Time	M,V				No
+   */
+  int MONITORING_DURATION = 3130;
+
+  /**
+   * S6t (3gpp TS 29-366) Maximum-Detection-Time	3131	8.4.11	Unsigned32	M,V				No
+   */
+  int MAXIMUM_DETECTION_TIME = 3131;
+
+  /**
+   * S6t (3gpp TS 29-366) Reachability-Type	3132	8.4.12	Unsigned32	M,V				No
+   */
+  int REACHABILITY_TYPE = 3132;
+
+  /**
+   * S6t (3gpp TS 29-366) Maximum Latency	3133	8.4.13	Unsigned32	M,V				No
+   */
+  int MAXIMUM_LATENCY = 3133;
+
+  /**
+   * S6t (3gpp TS 29-366) Maximum Response Time	3134	8.4.14	Unsigned32	M,V				No
+   */
+  int MAXIMUM_RESPONSE_TIME = 3134;
+
+  /**
+   * S6t (3gpp TS 29-366) Location-Information-Configuration	3135	8.4.15	Grouped	M,V				No
+   */
+  int LOCATION_INFORMATION_CONFIGURATION = 3135;
+
+  /**
+   * S6t (3gpp TS 29-366) MONTE-Location-Type	3136	8.4.16	Unsigned32	M,V				No
+   */
+  int MONTE_LOCATION_TYPE = 3136;
+
+  /**
+   * S6t (3gpp TS 29-366) Accuracy	3137	8.4.17	Unsigned32	M,V				No
+   */
+  int ACCURACY = 3137;
+
+  /**
+   * S6t (3gpp TS 29-366) Association-Type	3138	8.4.18	Unsigned32	M,V				No
+   */
+  int ASSOCIATION_TYPE = 3138;
+
+  /**
+   * S6t (3gpp TS 29-366) Roaming-Information	3139	8.4.19	Unsigned32	M,V				No
+   */
+  int ROAMING_INFORMATION = 3139;
+
+  /**
+   * S6t (3gpp TS 29-366) Reachability-Information	3140	8.4.20	Unsigned32	M,V				No
+   */
+  int REACHABILITY_INFORMATION = 3140;
+
+
+  /**
+   * S6t (3gpp TS 29-366) IMEI-Change	3141	8.4.22	Unsigned32	M,V				No
+   */
+  int IMEI_CHANGE = 3141;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Monitoring-Event-Config-Status	3142	8.4.24	Grouped	M,V				No
+   */
+  int MONITORING_EVENT_CONFIG_STATUS = 3142;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Supported-Services	3143	8.4.40	Grouped	M,V				No
+   */
+  int SUPPORTED_SERVICES = 3143;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Supported-Monitoring-Events	3144	8.4.41	Unsigned64	M,V				No
+   */
+  int SUPPORTED_MONITORING_EVENTS = 3144;
+
+
+  /**
+   * S6t (3gpp TS 29-366) CIR-Flags	3145	8.4.39	Unsigned32	M,V				No
+   */
+  int CIR_FLAGS = 3145;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Service-Result	3146	8.4.37	Grouped	M,V				No
+   */
+  int SERVICE_RESULT = 3146;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Service-Result-Code	3147	8.4.38	Unsigned32	M,V				No
+   */
+  int SERVICE_RESULT_CODE = 3147;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Reference-ID-Validity-Time	3148	8.4.42	Time	M,V				No
+   */
+  int REFERENCE_ID_VALIDITY_TIME = 3148;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Event-Handling	3149	8.4.43	Unsigned32	M,V				No
+   */
+  int EVENT_HANDLING = 3149;
+
+
+  /**
+   * S6t (3gpp TS 29-366) NIDD-Authorization-Request	3150	8.4.44	Grouped	M,V				No
+   */
+  int NIDD_AUTHORIZATION_REQUEST = 3150;
+
+
+  /**
+   * S6t (3gpp TS 29-366) NIDD-Authorization-Response	3151	8.4.45	Grouped	M,V				No
+   */
+  int NIDD_AUTHORIZATION_RESPONSE = 3151;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Service-Report	3152	8.4.47	Grouped	M,V				No
+   */
+  int SERVICE_REPORT = 3152;
+
+
+  /**
+   * S6t (3gpp TS 29-366) Node-Type	3153	8.4.48	Unsigned32	M,V				No
+   */
+  int NODE_TYPE = 3153;
+
+
+  /**
+   * S6t (3gpp TS 29-366) S6t-HSS-Cause	3154	8.4.50	Unsigned32	M,V				No
+   */
+  int S6T_HSS_CAUSE = 3154;
+
+
+  /**
+   * S6t RFC 7683 OC-Supported-Features (grouped)
+   */
+  int OC_SUPPORTED_FEATURES = 621;
+  /**
+   * S6t RFC 7683 OC-Feature-Vector 622 7.2 Unsigned64
+   */
+  int OC_FEATURE_VECTOR = 622;
+
+  /**
+   * S6t RFC 7683 OC-OLR 623 7.3 Grouped
+   */
+  int OC_OLR = 623;
+
+  /**
+   * S6t RFC 7683 OC-Sequence-Number 624 7.4 Unsigned64
+   */
+  int OC_SEQUENCE_NUMBER = 624;
+
+  /**
+   * S6t RFC 7683 OC-Validity-Duration 625 7.5 Unsigned32
+   */
+  int OC_VALIDITY_DURATION = 625;
+
+  /**
+   * S6t RFC 7683 OC-Report-Type 626 7.6 Enumerated
+   */
+  int OC_REPORT_TYPE = 626;
+
+  /**
+   * S6t RFC 7683 OC-Reduction-Percentage 627 7.7 Unsigned32
+   */
+  int OC_REDUCTION_PERCENTAGE = 627;
+
+
+  /**
    * @return the AVP code.
    */
   int getCode();

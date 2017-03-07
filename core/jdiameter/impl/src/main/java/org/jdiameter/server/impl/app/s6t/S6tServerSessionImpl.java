@@ -212,6 +212,7 @@ public class S6tServerSessionImpl extends S6tSession implements ServerS6tSession
                 setState(newState);
               }
               break;
+            /*
             case RECEIVE_NIR:
               try {
                 super.cancelMsgTimer();
@@ -232,7 +233,7 @@ public class S6tServerSessionImpl extends S6tSession implements ServerS6tSession
                 setState(newState);
               }
               break;
-
+            */
             case RECEIVE_RIA:
               try {
                 super.cancelMsgTimer();

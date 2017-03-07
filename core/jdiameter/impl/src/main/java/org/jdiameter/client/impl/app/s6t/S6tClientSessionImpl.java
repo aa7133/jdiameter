@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by Adi Enzel on 3/5/17.
+ *
  */
 public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession, EventListener<Request, Answer>, NetworkReqListener {
   private static final Logger logger = LoggerFactory.getLogger(S6tClientSessionImpl.class);
@@ -41,6 +42,7 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
 
   protected long appId = -1;
   protected IClientS6tSessionData sessionData;
+
   public S6tClientSessionImpl(IClientS6tSessionData sessionData, IS6tMessageFactory fct, ISessionFactory sf, ClientS6tSessionListener lst) {
     super(sf, sessionData);
     if (lst == null) {
@@ -124,7 +126,7 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
         return false;
       }
       final S6tSessionState state = this.sessionData.getS6tSessionState();
-      S6tSessionState newState = null;
+      S6tSessionState newState = S6tSessionState.IDLE;
       Event localEvent = (Event) event;
       Event.Type eventType = (Event.Type) event.getType();
       switch (state) {
@@ -163,7 +165,7 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
                 super.session.send(((AppEvent) event.getData()).getMessage(), this);
               }
               finally {
-                newState = S6tSessionState.OPEN;
+                newState = S6tSessionState.DISCONNECTED;
                 setState(newState);
               }
               break;

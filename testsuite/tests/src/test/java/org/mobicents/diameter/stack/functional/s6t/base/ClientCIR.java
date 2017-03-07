@@ -1,9 +1,11 @@
 package org.mobicents.diameter.stack.functional.s6t.base;
 
-import org.jdiameter.api.Avp;
-import org.jdiameter.api.AvpSet;
+import org.jdiameter.api.*;
+import org.jdiameter.api.s6t.ClientS6tSession;
+import org.jdiameter.api.s6t.events.JConfigurationInformationAnswer;
 import org.jdiameter.api.s6t.events.JConfigurationInformationRequest;
 import org.jdiameter.common.impl.app.s6t.JConfigurationInformationRequestImpl;
+import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.s6t.AbstractClient;
 import org.mobicents.diameter.stack.functional.s6t.BCDStringConverter;
 
@@ -47,6 +49,31 @@ public class ClientCIR extends AbstractClient{
       //*[ Proxy-Info ]
       //*[ Route-Record ]
       //*[AVP]
+
+    this.clientS6tSession.sendConfigurationInformationRequest(request);
+    Utils.printMessage(log, super.stack.getDictionary(), request.getMessage(), true);
+    this.sentConfigurationInfo = true;
+
   }
+
+  @Override
+  public void doConfigurationInformationAnswerEvent(ClientS6tSession session, JConfigurationInformationRequest request, JConfigurationInformationAnswer answer)
+          throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
+    if (this.receivedConfiguratinInfo) {
+      fail("S6t Received CIA more than once", null);
+      return;
+    }
+
+    this.receivedConfiguratinInfo = true;
+  }
+
+  public boolean isReceivedConfigurationInfo() {
+    return receivedConfiguratinInfo;
+  }
+
+  public boolean isSentConfigurationInfo() {
+    return sentConfigurationInfo;
+  }
+
 
 }

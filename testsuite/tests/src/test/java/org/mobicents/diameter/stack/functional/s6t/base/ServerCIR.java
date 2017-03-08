@@ -18,7 +18,9 @@ import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.s6t.AbstractServer;
 
 /**
- * Created by odldev on 3/7/17.
+ * Created by Adi Enzel on 3/7/17.
+ *
+ *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public class ServerCIR extends AbstractServer {
 

@@ -3,56 +3,53 @@ package org.mobicents.diameter.stack.functional.s6t.base;
 import org.jdiameter.api.Answer;
 import org.jdiameter.api.Avp;
 import org.jdiameter.api.AvpSet;
-import org.jdiameter.api.NetworkReqListener;
-import org.jdiameter.api.Request;
 import org.jdiameter.api.IllegalDiameterStateException;
 import org.jdiameter.api.InternalException;
+import org.jdiameter.api.NetworkReqListener;
 import org.jdiameter.api.OverloadException;
+import org.jdiameter.api.Request;
 import org.jdiameter.api.RouteException;
-
 import org.jdiameter.api.s6t.ServerS6tSession;
-import org.jdiameter.api.s6t.events.JConfigurationInformationAnswer;
-import org.jdiameter.api.s6t.events.JConfigurationInformationRequest;
-import org.jdiameter.common.impl.app.s6t.JConfigurationInformationAnswerImpl;
+import org.jdiameter.api.s6t.events.JNIDDInformationAnswer;
+import org.jdiameter.api.s6t.events.JNIDDInformationRequest;
+import org.jdiameter.common.impl.app.s6t.JNIDDInformationAnswerImpl;
 import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.s6t.AbstractServer;
 
 /**
- * Created by Adi Enzel on 3/7/17.
+ * Created by Adi Enzel on 3/8/17.
  *
- *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public class ServerCIR extends AbstractServer {
+public class ServerNIR extends AbstractServer{
 
-  protected boolean receivedConfigurationInfo;
-  protected boolean sentConfigurationInfo;
+  protected boolean receivedNIDDInformation;
+  protected boolean sentNIDDInformation;
 
-  protected JConfigurationInformationRequest request;
+  protected JNIDDInformationRequest request;
 
   /**
    *
    */
-  public ServerCIR() {
+  public ServerNIR() {
   }
 
-  public void sendConfigurationInformationAnswer() throws Exception {
-    if (!receivedConfigurationInfo || request == null) {
-      fail("S6t Did't got Configuration-Information-Request (CIR) or Configuration-Information-Answer (CIA) already sent.", null);
-      throw new Exception("S6t Did't got Configuration-Information-Request (CIR) or Configuration-Information-Answer (CIA) already sent. Request: " + this.request);
+  public void sendNIDDInformationAnswer() throws Exception {
+    if (!receivedNIDDInformation || request == null) {
+      fail("S6t - Did not receive NIDD-Information-Request (NIR) or answer already sent.", null);
+      throw new Exception("S6t Did not receive NIDD-Information-Request (NIR) or answer already sent. Request: " + this.request);
     }
 
-    JConfigurationInformationAnswer answer = new JConfigurationInformationAnswerImpl((Request) this.request.getMessage(), 2001);
+    JNIDDInformationAnswer answer = new JNIDDInformationAnswerImpl((Request) this.request.getMessage(), 2001);
 
     AvpSet reqSet = request.getMessage().getAvps();
     AvpSet set = answer.getMessage().getAvps();
     set.removeAvp(Avp.DESTINATION_HOST);
     set.removeAvp(Avp.DESTINATION_REALM);
-
-
     set.addAvp(reqSet.getAvp(Avp.CC_REQUEST_TYPE), reqSet.getAvp(Avp.CC_REQUEST_NUMBER), reqSet.getAvp(Avp.AUTH_APPLICATION_ID));
 
     request = null;
-
+    //TODO set paramters
     // <Location-Info-Answer> ::= < Diameter Header: 302, PXY, 16777216 >
     // < Session-Id >
     // { Vendor-Specific-Application-Id }
@@ -80,22 +77,22 @@ public class ServerCIR extends AbstractServer {
     // *[ Failed-AVP ]
     // *[ Proxy-Info ]
     // *[ Route-Record ]
-    this.serverS6tSession.sendConfigurationInformationAnswer(answer);
+    this.serverS6tSession.sendNIDDInformationAnswer(answer);
     Utils.printMessage(log, super.stack.getDictionary(), answer.getMessage(), true);
     this.request = null;
-    this.sentConfigurationInfo = true;
+    this.sentNIDDInformation = true;
   }
 
   @Override
   public Answer processRequest(Request request) {
     int code = request.getCommandCode();
-    if (code != JConfigurationInformationRequest.code) {
-      fail("Received Request with code not used by CxDx!. Code[" + request.getCommandCode() + "]", null);
+    if (code != JNIDDInformationRequest.code) {
+      fail("S6t - Received Request with code not used by S6t!. Code[" + request.getCommandCode() + "]", null);
       return null;
     }
     if (super.serverS6tSession != null) {
       // do fail?
-      fail("Received Request in base listener, not in app specific!" + code, null);
+      fail("S6t - Received Request in base listener, not in app specific!" + code, null);
     }
     else {
       try {
@@ -112,23 +109,23 @@ public class ServerCIR extends AbstractServer {
   }
 
   @Override
-  public void doConfigurationInformationRequestEvent(ServerS6tSession session, JConfigurationInformationRequest request)
+  public void doNIDDInformationRequestEvent(ServerS6tSession session, JNIDDInformationRequest request)
       throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
-    if (this.receivedConfigurationInfo) {
-      fail("Received Configuration-Information-Request (CIR) more than once", null);
+    if (this.receivedNIDDInformation) {
+      fail("S6t - Received NIDD-Information-Request (NIR) more than once", null);
       return;
     }
 
-    this.receivedConfigurationInfo = true;
+    this.receivedNIDDInformation = true;
     this.request = request;
   }
 
-  public boolean isReceivedConfigurationInfo() {
-    return receivedConfigurationInfo;
+  public boolean isReceivedNIDDInformation() {
+    return receivedNIDDInformation;
   }
 
-  public boolean isSentConfigurationInfo() {
-    return sentConfigurationInfo;
+  public boolean isSentNIDDInformation() {
+    return sentNIDDInformation;
   }
 
 }

@@ -1,5 +1,6 @@
 package org.mobicents.diameter.stack.functional.s6t.base;
 
+
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -27,23 +28,23 @@ import org.junit.runners.Parameterized.Parameters;
 /**
  * Created by Adi Enzel on 3/8/17.
  *
- *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
+
 @RunWith(Parameterized.class)
-public class S6tSessionBasicFlowCIRTest {
-  private ClientCIR clientNode;
-  private ServerCIR serverNode1;
+public class S6tSessionBasicFlowRIRTest {
+  private ClientRIR clientNode;
+  private ServerRIR serverNode1;
   private URI clientConfigURI;
   private URI serverNode1ConfigURI;
 
-
-  /**
-   *
-   * @param clientConfigUrl
-   * @param serverNode1ConfigURL
-   * @throws Exception
-   */
-  public S6tSessionBasicFlowCIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
+    /**
+     *
+     * @param clientConfigUrl
+     * @param serverNode1ConfigURL
+     * @throws Exception
+     */
+  public S6tSessionBasicFlowRIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
     super();
     this.clientConfigURI = new URI(clientConfigUrl);
     this.serverNode1ConfigURI = new URI(serverNode1ConfigURL);
@@ -52,8 +53,8 @@ public class S6tSessionBasicFlowCIRTest {
   @Before
   public void setUp() throws Exception {
     try {
-      this.clientNode = new ClientCIR();
-      this.serverNode1 = new ServerCIR();
+      this.clientNode = new ClientRIR();
+      this.serverNode1 = new ServerRIR();
 
       this.serverNode1.init(new FileInputStream(new File(this.serverNode1ConfigURI)), "SERVER1");
       this.serverNode1.start();
@@ -110,13 +111,13 @@ public class S6tSessionBasicFlowCIRTest {
   }
 
   @Test
-  public void testConfigurationInformation() throws Exception {
+  public void testReportingInformation() throws Exception {
     try {
       // pain of parameter tests :) ?
-      clientNode.sendConfigurationInformationRequest();
+      serverNode1.sendReportingInformationRequest();
       waitForMessage();
 
-      serverNode1.sendConfigurationInformationAnswer();
+      clientNode.sendReportingInformationAnswer();
       waitForMessage();
     }
     catch (Exception e) {
@@ -124,15 +125,15 @@ public class S6tSessionBasicFlowCIRTest {
       fail(e.toString());
     }
 
-    if (!serverNode1.isReceivedConfigurationInfo()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIR! ");
-      sb.append("Server ER:\n").append(serverNode1.createErrorReport(this.serverNode1.getErrors()));
+    if (!clientNode.isReceivedReportingInformation()) {
+      StringBuilder sb = new StringBuilder("S6t Did not receive Reporting-Information-Request(RIR)! ");
+      sb.append("Client ER:\n").append(clientNode.createErrorReport(this.clientNode.getErrors()));
 
       fail(sb.toString());
     }
-    if (!clientNode.isReceivedConfigurationInfo()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIA! ");
-      sb.append("Client ER:\n").append(clientNode.createErrorReport(this.clientNode.getErrors()));
+    if (!serverNode1.isReceivedReportingInformation()) {
+      StringBuilder sb = new StringBuilder("S6t Did not receive Reporting-Information-Answer(RIA)! ");
+      sb.append("Server ER:\n").append(serverNode1.createErrorReport(this.serverNode1.getErrors()));
 
       fail(sb.toString());
     }
@@ -161,13 +162,14 @@ public class S6tSessionBasicFlowCIRTest {
     //String replicatedClient = "configurations/functional-s6t/replicated-config-client.xml";
     //String replicatedServer1 = "configurations/functional-s6t/replicated-config-server-node1.xml";
 
-    Class<S6tSessionBasicFlowCIRTest> t = S6tSessionBasicFlowCIRTest.class;
+    Class<S6tSessionBasicFlowRIRTest> t = S6tSessionBasicFlowRIRTest.class;
     client = t.getClassLoader().getResource(client).toString();
     server1 = t.getClassLoader().getResource(server1).toString();
-    // replicatedClient = t.getClassLoader().getResource(replicatedClient).toString();
+    //replicatedClient = t.getClassLoader().getResource(replicatedClient).toString();
     //replicatedServer1 = t.getClassLoader().getResource(replicatedServer1).toString();
 
-    return Arrays.asList(new Object[][] { { client, server1 }/*, { replicatedClient, replicatedServer1 } */});
+    //return Arrays.asList(new Object[][] { { client, server1 }, { replicatedClient, replicatedServer1 } });
+    return Arrays.asList(new Object[][] { { client, server1 } });
   }
 
   private void waitForMessage() {

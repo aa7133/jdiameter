@@ -1,5 +1,4 @@
 package org.mobicents.diameter.stack.functional.s6t.base;
-
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -30,9 +29,9 @@ import org.junit.runners.Parameterized.Parameters;
  *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 @RunWith(Parameterized.class)
-public class S6tSessionBasicFlowCIRTest {
-  private ClientCIR clientNode;
-  private ServerCIR serverNode1;
+public class S6tSessionBasicFlowNIRTest {
+  private ClientNIR clientNode;
+  private ServerNIR serverNode1;
   private URI clientConfigURI;
   private URI serverNode1ConfigURI;
 
@@ -43,7 +42,7 @@ public class S6tSessionBasicFlowCIRTest {
    * @param serverNode1ConfigURL
    * @throws Exception
    */
-  public S6tSessionBasicFlowCIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
+  public S6tSessionBasicFlowNIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
     super();
     this.clientConfigURI = new URI(clientConfigUrl);
     this.serverNode1ConfigURI = new URI(serverNode1ConfigURL);
@@ -52,8 +51,8 @@ public class S6tSessionBasicFlowCIRTest {
   @Before
   public void setUp() throws Exception {
     try {
-      this.clientNode = new ClientCIR();
-      this.serverNode1 = new ServerCIR();
+      this.clientNode = new ClientNIR();
+      this.serverNode1 = new ServerNIR();
 
       this.serverNode1.init(new FileInputStream(new File(this.serverNode1ConfigURI)), "SERVER1");
       this.serverNode1.start();
@@ -110,13 +109,13 @@ public class S6tSessionBasicFlowCIRTest {
   }
 
   @Test
-  public void testConfigurationInformation() throws Exception {
+  public void testNIDDInformation() throws Exception {
     try {
       // pain of parameter tests :) ?
-      clientNode.sendConfigurationInformationRequest();
+      clientNode.sendNIDDInformation();
       waitForMessage();
 
-      serverNode1.sendConfigurationInformationAnswer();
+      serverNode1.sendNIDDInformationAnswer();
       waitForMessage();
     }
     catch (Exception e) {
@@ -124,14 +123,14 @@ public class S6tSessionBasicFlowCIRTest {
       fail(e.toString());
     }
 
-    if (!serverNode1.isReceivedConfigurationInfo()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIR! ");
+    if (!serverNode1.isReceivedNIDDInformation()) {
+      StringBuilder sb = new StringBuilder("S6t - Did not receive NIDD-Information-Request (NIR)! ");
       sb.append("Server ER:\n").append(serverNode1.createErrorReport(this.serverNode1.getErrors()));
 
       fail(sb.toString());
     }
-    if (!clientNode.isReceivedConfigurationInfo()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIA! ");
+    if (!clientNode.isReceivedNIDDInformation()) {
+      StringBuilder sb = new StringBuilder("S6t - Did not receive NIDD-Information-Answer (NIA)! ");
       sb.append("Client ER:\n").append(clientNode.createErrorReport(this.clientNode.getErrors()));
 
       fail(sb.toString());

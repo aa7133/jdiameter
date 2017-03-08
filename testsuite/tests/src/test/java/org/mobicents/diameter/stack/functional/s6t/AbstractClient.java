@@ -110,6 +110,7 @@ public abstract class AbstractClient extends TBase implements ClientS6tSessionLi
     // { Origin-Host }
     reqSet.removeAvp(Avp.ORIGIN_HOST);
     reqSet.addAvp(Avp.ORIGIN_HOST, getClientURI(), true);
+
     return r;
   }
 

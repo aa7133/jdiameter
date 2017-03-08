@@ -20,7 +20,7 @@ public class ClientCIR extends AbstractClient{
 
   }
 
-  public void sendConfigurationInfoRequest()  throws Exception {
+  public void sendConfigurationInformationRequest()  throws Exception {
     JConfigurationInformationRequest request =
             new JConfigurationInformationRequestImpl(super.createRequest(this.clientS6tSession, JConfigurationInformationRequest.code));
     AvpSet reqSet = request.getMessage().getAvps();

@@ -2373,6 +2373,11 @@ public interface Avp extends Wrapper, Serializable {
   int USER_CSG_INFORMATION = 2319;
 
   /**
+   * S6t (3GPP TS 29.173) LMSI 2400 OctetString M,V
+   */
+  int LMSI = 2400;
+
+  /**
    * S6t (3GPP TS 29.217) eNodeB-Id 4008 5.3.10 OctetString V
    */
   int ENODEB_ID = 4008;

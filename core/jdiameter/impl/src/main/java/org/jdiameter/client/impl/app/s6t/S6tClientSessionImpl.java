@@ -26,6 +26,7 @@ import org.jdiameter.common.api.app.s6t.IS6tMessageFactory;
 import org.jdiameter.common.api.app.s6t.S6tSessionState;
 import org.jdiameter.common.impl.app.AppAnswerEventImpl;
 import org.jdiameter.common.impl.app.AppRequestEventImpl;
+import org.jdiameter.common.impl.app.s6t.JReportingInformationRequestImpl;
 import org.jdiameter.common.impl.app.s6t.S6tSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -134,11 +135,15 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
         case IDLE:
           switch (eventType) {
             case RECEIVE_RIR:
-              this.sessionData.setBuffer( (Request) ((AppEvent) event.getData()).getMessage());
+              this.sessionData.setBuffer((Request) ((AppEvent) event.getData()).getMessage());
               super.startMsgTimer();
               newState = S6tSessionState.OPEN;
               setState(newState);
-              listener.doReportingInformationRequestEvent(this, (JReportingInformationRequest) event.getData());
+              Object request = (Object)event.getData();
+              System.out.println("=============================  " + request.getClass().getName());
+              System.out.println("============================== " + request.getClass().getCanonicalName());
+              listener.doReportingInformationRequestEvent(this, (JReportingInformationRequestImpl) request);
+              //listener.doReportingInformationRequestEvent(this, (JReportingInformationRequestImpl) event.getData());
               break;
 
             case SEND_MESSAGE:
@@ -299,7 +304,8 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
                 messageFactory.createNIDDInformationAnswer(answer)));
             break;
 
-          default:
+          default:              System.out.println("========= RECEIVE_RIR 333333================= got request : ");
+
             listener.doOtherEvent(session, new AppRequestEventImpl(request), new AppAnswerEventImpl(answer));
             break;
         }

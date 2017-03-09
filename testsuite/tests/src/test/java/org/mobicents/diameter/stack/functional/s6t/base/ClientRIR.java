@@ -42,7 +42,7 @@ public class ClientRIR extends AbstractClient {
   @Override
   public void init(InputStream configStream, String clientID) throws Exception {
     try {
-      super.init(configStream, clientID, ApplicationId.createByAuthAppId(10415, 16777216));
+      super.init(configStream, clientID, ApplicationId.createByAuthAppId(10415, 16777345));
       S6tSessionFactoryImpl S6tSessionFactory = new S6tSessionFactoryImpl(this.sessionFactory);
       sessionFactory.registerAppFacory(ServerS6tSession.class, S6tSessionFactory);
       sessionFactory.registerAppFacory(ClientS6tSession.class, S6tSessionFactory);

@@ -71,7 +71,7 @@ public class ServerRIR extends AbstractServer {
     // { Destination-Host }
     // { Destination-Realm }
     // { User-Name }
-    reqSet.addAvp(Avp.USER_NAME, "ala", false);
+    reqSet.addAvp(Avp.USER_NAME, "8388719", false);
     // [ Associated-Identities ]
     // *[ Supported-Features ]
     // *[ Public-Identity ]

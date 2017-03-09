@@ -28,11 +28,11 @@ public abstract class AbstractClient extends TBase implements ClientS6tSessionLi
   public void init(InputStream configStream, String clientID) throws Exception {
     try {
       super.init(configStream, clientID, ApplicationId.createByAuthAppId(10415, 16777345));
-      S6tSessionFactoryImpl shSessionFactory = new S6tSessionFactoryImpl(this.sessionFactory);
-      sessionFactory.registerAppFacory(ServerS6tSession.class, shSessionFactory);
-      sessionFactory.registerAppFacory(ClientS6tSession.class, shSessionFactory);
+      S6tSessionFactoryImpl s6tSessionFactory = new S6tSessionFactoryImpl(this.sessionFactory);
+      sessionFactory.registerAppFacory(ServerS6tSession.class, s6tSessionFactory);
+      sessionFactory.registerAppFacory(ClientS6tSession.class, s6tSessionFactory);
 
-      shSessionFactory.setClientSessionListener(this);
+      s6tSessionFactory.setClientSessionListener(this);
 
       this.clientS6tSession =
               this.sessionFactory.getNewAppSession(this.sessionFactory.getSessionId("xxTESTxx"), getApplicationId(), ClientS6tSession.class, null); // true...

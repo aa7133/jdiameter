@@ -61,6 +61,7 @@ import org.jdiameter.common.api.app.ro.IRoSessionData;
 import org.jdiameter.common.api.app.rx.IRxSessionData;
 import org.jdiameter.common.api.app.s13.IS13SessionData;
 import org.jdiameter.common.api.app.s6a.IS6aSessionData;
+import org.jdiameter.common.api.app.s6t.IS6tSessionData;
 import org.jdiameter.common.api.app.sh.IShSessionData;
 import org.jdiameter.common.api.data.ISessionDatasource;
 import org.jdiameter.common.impl.app.acc.AccLocalSessionDataFactory;
@@ -73,6 +74,7 @@ import org.jdiameter.common.impl.app.ro.RoLocalSessionDataFactory;
 import org.jdiameter.common.impl.app.rx.RxLocalSessionDataFactory;
 import org.jdiameter.common.impl.app.s13.S13LocalSessionDataFactory;
 import org.jdiameter.common.impl.app.s6a.S6aLocalSessionDataFactory;
+import org.jdiameter.common.impl.app.s6t.S6tLocalSessionDataFactory;
 import org.jdiameter.common.impl.app.sh.ShLocalSessionDataFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,6 +107,7 @@ public class LocalDataSource implements ISessionDatasource {
     appSessionDataFactories.put(IRxSessionData.class, new RxLocalSessionDataFactory());
     appSessionDataFactories.put(IS6aSessionData.class, new S6aLocalSessionDataFactory());
     appSessionDataFactories.put(IS13SessionData.class, new S13LocalSessionDataFactory());
+    appSessionDataFactories.put(IS6tSessionData.class, new S6tLocalSessionDataFactory());
   }
 
   public LocalDataSource(IContainer container) {

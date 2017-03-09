@@ -5415,10 +5415,6 @@
     <type type-name="UTF8String" />
   </avpdefn>
 
-  <avpdefn name="Application-Service-Provider-Identity" code="534" mandatory="must" may-encrypt="yes" protected="may" vendor-bit="must" vendor-id="TGPP">
-    <type type-name="UTF8String" />
-  </avpdefn>
-
   <!-- ************************ END 3GPP Rx AVPS ******************* -->
 
   <application id="16777236" vendor-id="TGPP" name="3GPP Rx" uri="http://www.3gpp.org/ftp/Specs/html-info/29214.htm">
@@ -7625,7 +7621,7 @@
     <type type-name="Unsigned32" />
   </avpdefn>
 
-  <avpdefn name="Periodic-time" code="3117" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+  <avpdefn name="Periodic-Time" code="3117" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
     <type type-name="Unsigned32" />
   </avpdefn>
 
@@ -7667,17 +7663,6 @@
 
   <avpdefn name="Reference-ID-Validity-Time" code="3148" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
     <type type-name="Time" />
-  </avpdefn>
-
-  <avpdefn name="Communication-Pattern-Set" code="3114" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
-    <grouped>
-      <avp name="Periodic-Communication-Indicator" multiplicity="0-1" />
-      <avp name="Communication-Duration-Time" multiplicity="0-1" />
-      <avp name="Periodic-Time" multiplicity="0-1" />
-      <avp name="Scheduled-Communication-Time" multiplicity="0+" />
-      <avp name="Stationary-Indication" multiplicity="0-1" />
-      <avp name="Reference-ID-Validity-Time" multiplicity="0-1" />
-    </grouped>
   </avpdefn>
 
   <avpdefn name="Communication-Pattern-Set" code="3114" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
@@ -7749,11 +7734,11 @@
     <type type-name="Unsigned32" />
   </avpdefn>
 
-  <avpdefn name="Maximum Latency" code="3133" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+  <avpdefn name="Maximum-Latency" code="3133" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
     <type type-name="Unsigned32" />
   </avpdefn>
 
-  <avpdefn name="Maximum Response Time" code="3134" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+  <avpdefn name="Maximum-Response-Time" code="3134" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
     <type type-name="Time" />
   </avpdefn>
 
@@ -7991,6 +7976,7 @@
  -->
 
  <application id="16777345" vendor-id="TGPP" name="3GPP S6t' (Rel14)" URI="http://www.3gpp.org/ftp//Specs/archive/29_series/29.336/29336-e00.zip">
+
     <command name="Configuration-Information-Request" code="8388718" request="true">
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
       <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
@@ -8008,8 +7994,6 @@
       <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
       <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
     </command>
-
-  <application id="16777345" vendor-id="TGPP" name="3GPP S6t' (Rel14)" URI="http://www.3gpp.org/ftp//Specs/archive/29_series/29.336/29336-e00.zip">
 
     <command name="Configuration-Information-Answer" code="8388718" request="false">
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />

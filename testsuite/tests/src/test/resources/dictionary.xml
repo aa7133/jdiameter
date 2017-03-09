@@ -7295,7 +7295,6 @@
     <command name="Notify-Answer" code="323" request="false">
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
       <avp name="Vendor-Specific-Application-Id" code="260" vendor="0" multiplicity="0-1" index="-1" />
-      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
       <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
@@ -7902,42 +7901,208 @@
     <type type-name="Unsigned32" />
   </avpdefn>
 
-  <application id="16777345" vendor-id="TGPP" name="3GPP S6t' (Rel14)" URI="http://www.3gpp.org/ftp//Specs/archive/29_series/29.336/29336-e00.zip">
+  <avpdefn name="DRMP" code="301" vendor-id="None" mandatory="may" protected="may" may-encrypt="yes" vendor-bit="mustnot" >
+    <type type-name="Enumerated">
+      <enum code="0" name="PRIORITY_0" />
+      <enum code="1" name="PRIORITY_1" />
+      <enum code="2" name="PRIORITY_2" />
+      <enum code="3" name="PRIORITY_3" />
+      <enum code="4" name="PRIORITY_4" />
+      <enum code="5" name="PRIORITY_5" />
+      <enum code="6" name="PRIORITY_6" />
+      <enum code="7" name="PRIORITY_7" />
+      <enum code="8" name="PRIORITY_8" />
+      <enum code="9" name="PRIORITY_9" />
+      <enum code="10" name="PRIORITY_10" />
+      <enum code="11" name="PRIORITY_11" />
+      <enum code="12" name="PRIORITY_12" />
+      <enum code="13" name="PRIORITY_13" />
+      <enum code="14" name="PRIORITY_14" />
+      <enum code="15" name="PRIORITY_15" />
+    </type>
+  </avpdefn>
+
+  <avpdefn name="OC-Feature-Vector" code="622" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Unsigned64" />
+  </avpdefn>
+
+  <avpdefn name="OC-Supported-Features" code="621" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <grouped>
+      <avp name="OC-Feature-Vector" multiplicity="0-1" />
+    </grouped>
+  </avpdefn>
+
+  <avpdefn name="OC-Sequence-Number" code="624" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Unsigned64" />
+  </avpdefn>
+
+  <avpdefn name="OC-Validity-Duration" code="625" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="OC-Report-Type" code="626" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Enumerated">
+      <enum code="0" name="HOST_REPORT" />
+      <enum code="1" name="REALM_REPORT" />
+    </type>
+  </avpdefn>
+
+  <avpdefn name="OC-Reduction-Percentage" code="627" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+
+  <avpdefn name="OC-OLR" code="623" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <grouped>
+      <avp name="OC-Sequence-Number" multiplicity="1" index="0"/>
+      <avp name="OC-Report-Type" multiplicity="1" index="1"/>
+      <avp name="OC-Reduction-Percentage" multiplicity="0-1" />
+      <avp name="OC-Validity-Duration" multiplicity="0-1" />
+    </grouped>
+  </avpdefn>
+
+  <!-- RFC not defined yet
+  <avpdefn name="Load-Type" code="TBD" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Enumerated">
+      <enum code="0" name="HOST" />
+      <enum code="1" name="PEER" />
+    </type>
+  </avpdefn>
+
+  <avpdefn name="Load-Value" code="TBD" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Unsigned64" />
+  </avpdefn>
+
+  <avpdefn name="Load-Value" code="TBD" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="Unsigned64" />
+  </avpdefn>
+
+  <avpdefn name="SourceID" code="TBD" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <type type-name="DiameterIdentity" />
+  </avpdefn>
+
+  <avpdefn name="Load" code="TBD" vendor-id="None" mandatory="may" protected="mustnot" may-encrypt="no" vendor-bit="mustnot" >
+    <grouped>
+      <avp name="Load-Type" multiplicity="0-1" index="0"/>
+      <avp name="Load-Value" multiplicity="0-1" index="1"/>
+      <avp name="SourceID" multiplicity="0-1" />
+    </grouped>
+  </avpdefn>
+ -->
+
+ <application id="16777345" vendor-id="TGPP" name="3GPP S6t' (Rel14)" URI="http://www.3gpp.org/ftp//Specs/archive/29_series/29.336/29336-e00.zip">
     <command name="Configuration-Information-Request" code="8388718" request="true">
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
-
-
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
       <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
       <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
       <avp name="Destination-Host" code="293" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
       <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="-1" />
-
-
-      <avp name="User-Name" code="1" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Monitoring-Event-Configuration" code="3122" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="CIR-Flags" code="3145" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="AESE-Communication-Pattern" code="3113" vendor="10415" multiplicity="0+" index="-1" />
       <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
       <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
     </command>
 
-    < Configuration-Information-Request > ::=	< Diameter Header: 8388718, REQ, PXY, 16777345 >
-    < Session-Id >
-    [ DRMP ]
-    { Auth-Session-State }
-    { Origin-Host }
-    { Origin-Realm }
-    [ Destination-Host ]
-    { Destination-Realm }
-    { User-Identifier }
-    [ OC-Supported-Features ]
-    *[ Supported-Features ]
-    *[ Monitoring-Event-Configuration ]
-    [ CIR-Flags ]
-    *[ AESE-Communication-Pattern ]
-    *[ Proxy-Info ]
-    *[ Route-Record ]
-    *[AVP]
+  <application id="16777345" vendor-id="TGPP" name="3GPP S6t' (Rel14)" URI="http://www.3gpp.org/ftp//Specs/archive/29_series/29.336/29336-e00.zip">
 
+    <command name="Configuration-Information-Answer" code="8388718" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="OC-OLR" code="623" vendor="0" multiplicity="0-1" index="-1" />
+      <!--<avp name="Load" code="TBD" vendor="0" multiplicity="0+" index="-1" /> -->
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Monitoring-Event-Report" code="3123" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Monitoring-Event-Config-Status" code="3142" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="AESE-Communication-Pattern-Config-Status" code="3120" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="CIR-Flags" code="3145" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="AESE-Communication-Pattern" code="3113" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Supported-Services" code="3143" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="S6t-HSS-Cause" code="3154" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+    <command name="Reporting-Information-Request" code="8388719" request="true">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Host" code="293" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="-1" />
+      <avp name="Monitoring-Event-Report" code="3123" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Supported-Services" code="3143" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+   </command>
+
+    <command name="Reporting-Information-Answer" code="8388719" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+
+    <command name="NIDD-Information-Request" code="8388726" request="true">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Host" code="293" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="NIDD-Authorization-Request" code="3150" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+   </command>
+
+    <command name="NIDD-Information-Answer" code="8388726" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="OC-OLR" code="623" vendor="0" multiplicity="0-1" index="-1" />
+      <!--<avp name="Load" code="TBD" vendor="0" multiplicity="0+" index="-1" /> -->
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="-1" />
+      <avp name="NIDD-Authorization-Response" code="3151" vendor="10415" multiplicity="1" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
 
   </application>
 

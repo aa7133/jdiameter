@@ -8,6 +8,8 @@ import org.jdiameter.common.impl.app.s6t.JConfigurationInformationRequestImpl;
 import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.s6t.AbstractClient;
 import org.mobicents.diameter.stack.functional.s6t.BCDStringConverter;
+import org.mobicents.diameter.stack.functional.s6t.S6tMonitoringType;
+import sun.font.TrueTypeFont;
 
 /**
  * Created by Adi Enzel on 3/6/17.
@@ -42,9 +44,23 @@ public class ClientCIR extends AbstractClient{
     //add to group
     userIdentifier.addAvp(Avp.MSISDN, BCDStringConverter.toBCD(str), getApplicationId().getVendorId(), true, false);
        //[ OC-Supported-Features ]
+    //add group
+    AvpSet ocSupportedFeature = reqSet.addGroupedAvp(Avp.OC_SUPPORTED_FEATURES, getApplicationId().getVendorId(), true, false);
+    // add OC-Feature-Vector
+    ocSupportedFeature.addAvp(Avp.OC_FEATURE_VECTOR, 28, getApplicationId().getVendorId(), true, false, false);
       //*[ Supported-Features ]
       //*[ Monitoring-Event-Configuration ]
-       //[ CIR-Flags ]
+    AvpSet monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
+    monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 3456, getApplicationId().getVendorId(), true, false, false );
+    monitoringEventConfig.addAvp(Avp.SCEF_ID, "345678", getApplicationId().getVendorId(), true, false, false );
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.AVAILABILITY_AFTER_DDN_FAILURE, getApplicationId().getVendorId(), true, false, false );
+
+    monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
+    monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 3457, getApplicationId().getVendorId(), true, false, false );
+    monitoringEventConfig.addAvp(Avp.SCEF_ID,  "345678", getApplicationId().getVendorId(), true, false, false );
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.LOCATION_REPORTING, getApplicationId().getVendorId(), true, false, false );
+
+    //[ CIR-Flags ]
       //*[ AESE-Communication-Pattern ]
       //*[ Proxy-Info ]
       //*[ Route-Record ]

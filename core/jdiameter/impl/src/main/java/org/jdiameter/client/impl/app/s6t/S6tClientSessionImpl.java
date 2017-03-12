@@ -139,11 +139,7 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
               super.startMsgTimer();
               newState = S6tSessionState.OPEN;
               setState(newState);
-              Object request = (Object)event.getData();
-              System.out.println("=============================  " + request.getClass().getName());
-              System.out.println("============================== " + request.getClass().getCanonicalName());
-              listener.doReportingInformationRequestEvent(this, (JReportingInformationRequestImpl) request);
-              //listener.doReportingInformationRequestEvent(this, (JReportingInformationRequestImpl) event.getData());
+              listener.doReportingInformationRequestEvent(this, (JReportingInformationRequestImpl) event.getData());
               break;
 
             case SEND_MESSAGE:
@@ -259,10 +255,6 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
 
 
 
-
-
-
-
   private class RequestDelivery implements Runnable {
     ClientS6tSession session;
     Request request;
@@ -272,7 +264,7 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
       try {
         switch (request.getCommandCode()) {
           case JReportingInformationRequest.code:
-            handleEvent(new Event(Event.Type.RECEIVE_RIR, messageFactory.createConfigurationInformationRequest(request), null));
+            handleEvent(new Event(Event.Type.RECEIVE_RIR, messageFactory.createReportingInformationRequest(request), null));
             break;
           default:
             listener.doOtherEvent(session, new AppRequestEventImpl(request), null);
@@ -304,8 +296,7 @@ public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession
                 messageFactory.createNIDDInformationAnswer(answer)));
             break;
 
-          default:              System.out.println("========= RECEIVE_RIR 333333================= got request : ");
-
+          default:
             listener.doOtherEvent(session, new AppRequestEventImpl(request), new AppAnswerEventImpl(answer));
             break;
         }

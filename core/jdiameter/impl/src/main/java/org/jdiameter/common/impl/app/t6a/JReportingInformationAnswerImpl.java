@@ -1,8 +1,8 @@
-package org.jdiameter.common.impl.app.s6t;
+package org.jdiameter.common.impl.app.t6a;
 
 import org.jdiameter.api.Answer;
 import org.jdiameter.api.Request;
-import org.jdiameter.api.s6t.events.JReportingInformationAnswer;
+import org.jdiameter.api.t6a.events.JReportingInformationAnswer;
 import org.jdiameter.common.impl.app.AppAnswerEventImpl;
 
 /**

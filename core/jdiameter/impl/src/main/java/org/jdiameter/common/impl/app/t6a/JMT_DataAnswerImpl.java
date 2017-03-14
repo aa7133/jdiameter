@@ -1,23 +1,23 @@
-package org.jdiameter.common.impl.app.s6t;
+package org.jdiameter.common.impl.app.t6a;
 
 import org.jdiameter.api.Answer;
 import org.jdiameter.api.Request;
-import org.jdiameter.api.s6t.events.JNIDDInformationAnswer;
+import org.jdiameter.api.t6a.events.JMT_DataAnswer;
 import org.jdiameter.common.impl.app.AppAnswerEventImpl;
 
 /**
- * Created by Adi Enzel on 3/5/17.
+ * Created by Adi Enzel on 3/13/17.
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public class JNIDDInformationAnswerImpl extends AppAnswerEventImpl implements JNIDDInformationAnswer {
+public class JMT_DataAnswerImpl extends AppAnswerEventImpl implements JMT_DataAnswer {
   private static final long serialVersionUID = 1L;
 
   /**
    *
    * @param answer
    */
-  public JNIDDInformationAnswerImpl(Answer answer) {
+  public JMT_DataAnswerImpl(Answer answer) {
     super(answer);
   }
 
@@ -26,9 +26,8 @@ public class JNIDDInformationAnswerImpl extends AppAnswerEventImpl implements JN
    * @param request
    * @param resultCode
    */
-  public JNIDDInformationAnswerImpl(Request request, long resultCode) {
+  public JMT_DataAnswerImpl(Request request, long resultCode) {
     super(request.createAnswer(resultCode));
   }
-
 
 }

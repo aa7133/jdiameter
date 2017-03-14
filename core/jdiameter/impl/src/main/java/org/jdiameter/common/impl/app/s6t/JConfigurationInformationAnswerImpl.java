@@ -6,7 +6,7 @@ import org.jdiameter.api.s6t.events.JConfigurationInformationAnswer;
 import org.jdiameter.common.impl.app.AppAnswerEventImpl;
 
 /**
- * Created by odldev on 3/5/17.
+ * Created by Adi Enzel on 3/5/17.
  */
 public class JConfigurationInformationAnswerImpl extends AppAnswerEventImpl implements JConfigurationInformationAnswer {
   private static final long serialVersionUID = 1L;

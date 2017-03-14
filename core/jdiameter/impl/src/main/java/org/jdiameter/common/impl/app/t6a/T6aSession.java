@@ -1,11 +1,11 @@
-package org.jdiameter.common.impl.app.s6t;
+package org.jdiameter.common.impl.app.t6a;
 
 import org.jdiameter.api.NetworkReqListener;
 import org.jdiameter.api.app.StateChangeListener;
 import org.jdiameter.api.app.StateMachine;
 import org.jdiameter.client.api.ISessionFactory;
-import org.jdiameter.common.api.app.s6t.IS6tMessageFactory;
-import org.jdiameter.common.api.app.s6t.IS6tSessionData;
+import org.jdiameter.common.api.app.t6a.IT6aMessageFactory;
+import org.jdiameter.common.api.app.t6a.IT6aSessionData;
 import org.jdiameter.common.impl.app.AppSessionImpl;
 
 import java.io.Serializable;
@@ -15,23 +15,23 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by Adi Enzel on 3/5/17.
+ * Created by Adi Enzel on 3/13/17.
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public abstract class S6tSession extends AppSessionImpl implements NetworkReqListener, StateMachine {
+public abstract class T6aSession extends AppSessionImpl implements NetworkReqListener, StateMachine {
 
   public static final int _TX_TIMEOUT = 30 * 1000;
 
   protected Lock sendAndStateLock = new ReentrantLock();
 
   protected transient List<StateChangeListener> stateListeners = new CopyOnWriteArrayList<>();
-  protected transient IS6tMessageFactory messageFactory;
+  protected transient IT6aMessageFactory messageFactory;
 
   protected static final String TIMER_NAME_MSG_TIMEOUT = "MSG_TIMEOUT";
-  protected IS6tSessionData sessionData;
+  protected IT6aSessionData sessionData;
 
-  public S6tSession(ISessionFactory sf, IS6tSessionData sessionData) {
+  public T6aSession(ISessionFactory sf, IT6aSessionData sessionData) {
     super(sf, sessionData);
     this.sessionData = sessionData;
   }
@@ -102,7 +102,7 @@ public abstract class S6tSession extends AppSessionImpl implements NetworkReqLis
     if (getClass() != obj.getClass()) {
       return false;
     }
-    S6tSession other = (S6tSession) obj;
+    T6aSession other = (T6aSession) obj;
     if (sessionData == null) {
       if (other.sessionData != null) {
         return false;

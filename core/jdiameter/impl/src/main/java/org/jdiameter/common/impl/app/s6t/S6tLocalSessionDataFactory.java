@@ -10,6 +10,8 @@ import org.jdiameter.server.impl.app.s6t.ServerS6tSessionDataLocalImpl;
 
 /**
  * Created by Adi Enzel on 3/5/17.
+ *
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public class S6tLocalSessionDataFactory implements IAppSessionDataFactory<IS6tSessionData> {
 

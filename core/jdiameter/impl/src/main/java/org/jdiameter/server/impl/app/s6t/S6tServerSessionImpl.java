@@ -212,28 +212,6 @@ public class S6tServerSessionImpl extends S6tSession implements ServerS6tSession
                 setState(newState);
               }
               break;
-            /*
-            case RECEIVE_NIR:
-              try {
-                super.cancelMsgTimer();
-                listener.doNIDDInformationRequestEvent(this, (JNIDDInformationRequest) localEvent.getRequest());
-              }
-              finally {
-                newState = S6tSessionState.DISCONNECTED;
-                setState(newState);
-              }
-              break;
-            case RECEIVE_CIR:
-              try {
-                super.cancelMsgTimer();
-                listener.doConfigurationInformationRequestEvent(this, (JConfigurationInformationRequest) localEvent.getRequest());
-              }
-              finally {
-                newState = S6tSessionState.DISCONNECTED;
-                setState(newState);
-              }
-              break;
-            */
             case RECEIVE_RIA:
               try {
                 super.cancelMsgTimer();
@@ -392,7 +370,7 @@ public class S6tServerSessionImpl extends S6tSession implements ServerS6tSession
   protected void send(org.jdiameter.server.impl.app.s6t.Event.Type type, AppEvent request, AppEvent answer) throws InternalException {
     try {
       if (type != null) {
-        handleEvent(new org.jdiameter.server.impl.app.s6t.Event(type, request, answer));
+        handleEvent(new Event(type, request, answer));
       }
     }
     catch (Exception e) {

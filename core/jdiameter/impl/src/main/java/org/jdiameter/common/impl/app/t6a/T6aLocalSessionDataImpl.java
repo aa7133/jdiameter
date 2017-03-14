@@ -1,30 +1,30 @@
-package org.jdiameter.common.impl.app.s6t;
+package org.jdiameter.common.impl.app.t6a;
 
 import org.jdiameter.api.Request;
 import org.jdiameter.common.api.app.AppSessionDataLocalImpl;
-import org.jdiameter.common.api.app.s6t.IS6tSessionData;
-import org.jdiameter.common.api.app.s6t.S6tSessionState;
+import org.jdiameter.common.api.app.t6a.IT6aSessionData;
+import org.jdiameter.common.api.app.t6a.T6aSessionState;
 
 import java.io.Serializable;
 
 /**
- * Created by Adi Enzel on 3/5/17.
+ * Created by Adi Enzel on 3/13/17.
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public class S6tLocalSessionDataImpl extends AppSessionDataLocalImpl implements IS6tSessionData {
+public class T6aLocalSessionDataImpl extends AppSessionDataLocalImpl implements IT6aSessionData {
 
-  protected S6tSessionState state = S6tSessionState.IDLE;
+  protected T6aSessionState state = T6aSessionState.IDLE;
   protected Request buffer;
   protected Serializable tsTimerId;
 
   @Override
-  public void setS6tSessionState(S6tSessionState state) {
+  public void setT6aSessionState(T6aSessionState state) {
     this.state = state;
   }
 
   @Override
-  public S6tSessionState getS6tSessionState() {
+  public T6aSessionState getT6aSessionState() {
     return this.state;
   }
 

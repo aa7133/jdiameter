@@ -39,6 +39,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Created by Adi Enzel on 3/5/17.
+ *
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public class S6tSessionFactoryImpl implements IS6tSessionFactory, ServerS6tSessionListener, ClientS6tSessionListener, IS6tMessageFactory,
         StateChangeListener<AppSession> {

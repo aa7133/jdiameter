@@ -7779,8 +7779,10 @@
       <avp name="Charged-Party" multiplicity="0-1" />
       <avp name="Maximum-Detection-Time" multiplicity="0-1" />
       <avp name="UE-Reachability-Configuration" multiplicity="0-1" />
-      <avp name="UE-Reachability-Configuration" multiplicity="0-1" />
       <avp name="Location-Information-Configuration" multiplicity="0-1" />
+      <!-- ==========  this for T6a only ==========================-->
+      <avp name="Number-of-UE-Per-Location-Configuration" multiplicity="0+" />
+
       <avp name="Association-Type" multiplicity="0-1" />
     </grouped>
   </avpdefn>
@@ -7815,7 +7817,7 @@
 
   <avpdefn name="Monitoring-Event-Report" code="3123" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
     <grouped>
-      <avp name="SCEF-Reference-ID" multiplicity="1" />
+      <avp name="SCEF-Reference-ID" multiplicity="1" index="0"/>
       <avp name="SCEF-ID" multiplicity="0-1" />
       <avp name="Visited-PLMN-Id" multiplicity="1" />
       <avp name="Roaming-Information" multiplicity="0+" />
@@ -7825,6 +7827,10 @@
       <avp name="Monitoring-Type" multiplicity="0-1" />
       <avp name="Event-Handling" multiplicity="0-1" />
       <avp name="Service-Report" multiplicity="0-1" />
+      <!-- ==== add for T6a -->
+      <avp name="Communication-Failure-Information" multiplicity="0-1" />
+      <avp name="Number-Of-UE-Per-Location-Report" multiplicity="0+" />
+
     </grouped>
   </avpdefn>
 
@@ -7999,7 +8005,7 @@
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
       <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
-      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
       <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
       <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
@@ -8089,5 +8095,208 @@
     </command>
 
   </application>
+  <!-- ************************ END 3GPP S6t AVPS ******************* -->
+
+
+
+
+
+
+  <!-- ************************* Start 3GPP T6a,b, c T7 AVP'S ****************************-->
+
+  <avpdefn name="Cause-Type" code="4301" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="S1AP-Cause" code="4302" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="RANAP-Cause" code="4303" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="BSSGP-Cause" code="4309" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="GMM-Cause" code="4304" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="SM-Cause" code="4305" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="Communication-Failure-Information" code="4300" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <grouped>
+      <avp name="Cause-Type" multiplicity="0-1" />
+      <avp name="S1AP-Cause" multiplicity="0-1" />
+      <avp name="RANAP-Cause" multiplicity="0-1" />
+      <avp name="BSSGP-Cause" multiplicity="0-1" />
+      <avp name="GMM-Cause" multiplicity="0-1" />
+      <avp name="SM-Cause" multiplicity="0-1" />
+    </grouped>
+  </avpdefn>
+
+  <avpdefn name="Number-of-UE-Per-Location-Configuration" code="4306" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <grouped>
+      <avp name="EPS-Location-Information" multiplicity="1"/>
+    </grouped>
+  </avpdefn>
+
+  <avpdefn name="UE-Count" code="4308" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="Number-of-UE-Per-Location-Report" code="4307" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <grouped>
+      <avp name="EPS-Location-Information" multiplicity="1"/>
+      <avp name="UE-Count" multiplicity="1"/>
+    </grouped>
+  </avpdefn>
+
+  <avpdefn name="Connection-Action" code="4314" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="Non-IP-Data" code="4315" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Octetstring" />
+  </avpdefn>
+
+  <avpdefn name="Uplink-Rate-Limit" code="4311" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="Downlink-Rate-Limit" code="4312" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="Extended-PCO" code="4313" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="OctetString" />
+  </avpdefn>
+
+  <avpdefn name="SCEF-Wait-Time" code="4316" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Time" />
+  </avpdefn>
+
+  <avpdefn name="CMR-Flags" code="4317" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="Serving-PLMN-Rate-Control" code="4310" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <grouped>
+      <avp name="Uplink-Rate-Limit" multiplicity="0-1"/>
+      <avp name="Downlink-Rate-Limit" multiplicity="0-1"/>
+    </grouped>
+  </avpdefn>
+
+  <avpdefn name="Counter-Value" code="4319" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="RRC-Counter-Timestamp" code="4320" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Time" />
+  </avpdefn>
+
+  <avpdefn name="RRC-Cause-Counter" code="4318" vendor-id="TGPP" mandatory="must" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <grouped>
+      <avp name="Counter-Value" multiplicity="0-1"/>
+      <avp name="RRC-Counter-Timestamp" multiplicity="0-1"/>
+    </grouped>
+  </avpdefn>
+
+  <avpdefn name="PDN-Connection-Charging-ID" code="2050" vendor-id="TGPP" mandatory="must" protected="may" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Unsigned32" />
+  </avpdefn>
+
+  <avpdefn name="Maximum-Retransmission-Time" code="3330" vendor-id="TGPP" mandatory="mustnot" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Time" />
+  </avpdefn>
+
+  <avpdefn name="Requested-Retransmission-Time" code="3331" vendor-id="TGPP" mandatory="mustnot" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Time" />
+  </avpdefn>
+
+  <avpdefn name="Maximum-UE-Availability-Time" code="3329" vendor-id="TGPP" mandatory="mustnot" protected="mustnot" may-encrypt="no" vendor-bit="must" >
+    <type type-name="Time" />
+  </avpdefn>
+
+ <application id="16777346" vendor-id="TGPP" name="3GPP T6a' (Rel14)" URI="http://www.3gpp.org/ftp//Specs/archive/29_series/29.336/29128-e10.zip">
+
+    <command name="Configuration-Information-Request" code="8388718" request="true">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Host" code="293" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Monitoring-Event-Configuration" code="3122" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+    <command name="Configuration-Information-Answer" code="8388718" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Monitoring-Event-Report" code="3123" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Monitoring-Event-Config-Status" code="3142" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+
+
+
+    <command name="Reporting-Information-Request" code="8388719" request="true">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Host" code="293" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Monitoring-Event-Report" code="3123" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+   </command>
+
+    <command name="Reporting-Information-Answer" code="8388719" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="OC-OLR" code="623" vendor="0" multiplicity="0-1" index="-1" />
+      <!--<avp name="Load" code="TBD" vendor="0" multiplicity="0+" index="-1" /> -->
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+
+
+ </application>
+
+
+  <!-- ************************* End 3GPP T6a,b, c T7 AVP'S ****************************-->
+
 
 </dictionary>

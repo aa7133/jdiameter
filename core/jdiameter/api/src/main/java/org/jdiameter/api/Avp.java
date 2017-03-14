@@ -2623,29 +2623,26 @@ public interface Avp extends Wrapper, Serializable {
    */
   int NIDD_AUTHORIZATION_RESPONSE = 3151;
 
-
   /**
    * S6t (3gpp TS 29-366) Service-Report 3152 8.4.47 Grouped M,V
    */
   int SERVICE_REPORT = 3152;
-
 
   /**
    * S6t (3gpp TS 29-366) Node-Type 3153 8.4.48 Unsigned32 M,V
    */
   int NODE_TYPE = 3153;
 
-
   /**
    * S6t (3gpp TS 29-366) S6t-HSS-Cause 3154 8.4.50 Unsigned32 M,V
    */
   int S6T_HSS_CAUSE = 3154;
 
-
   /**
    * S6t RFC 7683 OC-Supported-Features (grouped)
    */
   int OC_SUPPORTED_FEATURES = 621;
+
   /**
    * S6t RFC 7683 OC-Feature-Vector 622 7.2 Unsigned64
    */
@@ -2678,12 +2675,66 @@ public interface Avp extends Wrapper, Serializable {
 
 
   /**
+   * T6a TS 29.128
+   */
+  int CAUSE_TYPE = 4301;
+
+  int S1AP_CAUSE = 4302;
+
+  int ranap_cause = 4303;
+
+  int BSSGP_CAUSE = 4309;
+
+  int GMM_CAUSE = 4304;
+
+  int SM_CAUSE = 4305;
+
+  int COMMUNICATION_FAILURE_INFORMATION = 4300;
+
+  int NUMBER_OF_UE_PER_LOCATION_CONFIGURATION = 4306;
+
+  int UE_COUNT = 4308;
+
+  int NUMBER_OF_UE_PER_LOCATION_REPORT = 4307;
+
+  int CONNECTION_ACTION = 4314;
+
+  int NON_IP_DATA = 4315;
+
+  int UPLINK_RATE_LIMIT = 4311;
+
+  int DOWNLINK_RATE_LIMIT = 4312;
+
+  int EXTENDED_PCO = 4313;
+
+  int SCEF_WAIT_TIME = 4316;
+
+  int CMR_FLAGS = 4317;
+
+  int SERVING_PLMN_RATE_CONTROL = 4310;
+
+  int COUNTER_VALUE = 4319;
+
+  int RRC_COUNTER_TIMESTAMP = 4320;
+
+  int RRC_CAUSE_COUNTER = 4318;
+
+  int PDN_CONNECTION_CHARGING_ID = 2050;
+
+  int MAXIMUM_RETRANSMISSION_TIME = 3330;
+
+  int REQUESTED_RETRANSMISSION_TIME = 3331;
+
+  int MAXIMUM_UE_AVAILABILITY_TIME = 3329;
+
+
+  /**
    * @return the AVP code.
    */
   int getCode();
 
   /**
-   * @return true if Vendor-id is present in Avp header
+   * @return true if Vendor_id is present in Avp header
    */
   boolean isVendorId();
 

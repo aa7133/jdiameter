@@ -8206,7 +8206,7 @@
     </grouped>
   </avpdefn>
 
-  <avpdefn name="PDN-Connection-Charging-ID" code="2050" vendor-id="TGPP" mandatory="must" protected="may" may-encrypt="no" vendor-bit="must" >
+  <avpdefn name="PDN-Connection-Charging-Id" code="2050" vendor-id="TGPP" mandatory="must" protected="may" may-encrypt="no" vendor-bit="must" >
     <type type-name="Unsigned32" />
   </avpdefn>
 
@@ -8256,7 +8256,125 @@
     </command>
 
 
+    <command name="Connection-Management-Request" code="8388732" request="true">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="1" />
+      <avp name="Bearer-Identifier" code="3102" vendor="10415" multiplicity="1" index="2" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Host" code="293" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="CMR-Flags" code="4317" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Maximum-UE-Availability-Time" code="3329" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Connection-Action" code="4314" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Service-Selection" code="493" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Serving-PLMN-Rate-Control" code="4310" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Extended-PCO" code="4313" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="3GPP-Charging-Characteristics" code="13" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="RAT-Type" code="1032" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Terminal-Information" code="1401" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Visited-PLMN-Id" code="1407" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
 
+    <command name="Connection-Management-Answer" code="8388732" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="OC-OLR" code="623" vendor="0" multiplicity="0-1" index="-1" />
+      <!--<avp name="Load" code="TBD" vendor="0" multiplicity="0+" index="-1" /> -->
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="PDN-Connection-Charging-Id" code="2050" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Extended-PCO" code="4313" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+    <command name="MO-Data-Request" code="8388733" request="true">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="1" />
+      <avp name="Bearer-Identifier" code="3102" vendor="10415" multiplicity="1" index="2" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Host" code="293" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Non-IP-Data" code="4315" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="RRC-Cause-Counter" code="4318" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+    <command name="MO-Data-Answer" code="8388733" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="OC-OLR" code="623" vendor="0" multiplicity="0-1" index="-1" />
+      <!--<avp name="Load" code="TBD" vendor="0" multiplicity="0+" index="-1" /> -->
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+    <command name="MT-Data-Request" code="8388734" request="true">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="1" />
+      <avp name="Bearer-Identifier" code="3102" vendor="10415" multiplicity="1" index="2" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Destination-Host" code="293" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Non-IP-Data" code="4315" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="SCEF-Wait-Time" code="4316" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Maximum-Retransmission-Time" code="3330" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
+
+    <command name="MT-Data-Answer" code="8388734" request="false">
+      <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
+      <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Result-Code" code="268" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Experimental-Result" code="297" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />
+      <avp name="Origin-Realm" code="296" vendor="0" multiplicity="1" index="-1" />
+      <avp name="OC-Supported-Features" code="621" vendor="10415" multiplicity="0-1" index="-1" />
+      <avp name="OC-OLR" code="623" vendor="0" multiplicity="0-1" index="-1" />
+      <!--<avp name="Load" code="TBD" vendor="0" multiplicity="0+" index="-1" /> -->
+      <avp name="Requested-Retransmission-Time" code="3331" vendor="0" multiplicity="0-1" index="-1" />
+      <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
+      <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
+      <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
+    </command>
 
     <command name="Reporting-Information-Request" code="8388719" request="true">
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
@@ -8272,7 +8390,7 @@
       <avp name="Failed-AVP" code="279" vendor="0" multiplicity="0+" index="-1" />
       <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
       <avp name="Route-Record" code="282" vendor="0" multiplicity="0+" index="-1" />
-   </command>
+    </command>
 
     <command name="Reporting-Information-Answer" code="8388719" request="false">
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />

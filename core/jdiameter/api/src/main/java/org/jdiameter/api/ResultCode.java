@@ -281,4 +281,106 @@ public interface ResultCode {
    */
   int NO_COMMON_SECURITY = 5017;
 
+  /**
+   *   This result code shall be sent by the MME/SGSN or the IWK-SCEF to indicate that
+   *   the SCEF is not allowed to request Monitoring services.
+   *   This error code is defined in 3GPP TS 29.336 [5].
+   */
+  int DIAMETER_ERROR_UNAUTHORIZED_REQUESTING_ENTITY = 5510;
+
+  /**
+   * This result code shall be sent by the MME/SGSN or the IWK-SCEF to indicate that
+   * the specific service requested by the SCEF is not allowed as per local policies.
+   * This error code is defined in 3GPP TS 29.336 [5].
+   */
+  int DIAMETER_ERROR_UNAUTHORIZED_SERVICE = 5511;
+
+  /**
+   * This result code shall be sent by the HSS to indicate that the specific service
+   * requested by the SCEF is not allowed for an UE, or that it cannot be delivered
+   * according to the current subscribed services of the UE.
+   *
+   */
+  int DIAMETER_ERROR_REQUESTED_RANGE_IS_NOT_ALLOWED = 5512;
+
+
+  /**
+   * This result code shall be sent by the MME/SGSN to indicate that
+   * the specific service requested by the SCEF could not be stored.
+   * This error code is defined in 3GPP TS 29.336 [5].
+   */
+  int DIAMETER_ERROR_CONFIGURATION_EVENT_STORAGE_NOT_SUCCESSFUL = 5513;
+
+  /**
+   * This result code shall be sent by the IWK-SCEF to indicate that
+   * the requested deletion by the MME/SGSN could not be performed
+   * because the event does not exist.
+   * This error code is defined in 3GPP TS 29.336 [5].
+   */
+  int DIAMETER_ERROR_CONFIGURATION_EVENT_NON_EXISTANT = 5514;
+
+  /**
+   * This result code shall be sent by the MME/SGSN to indicate that
+   * the location for which a related monitoring event is configured
+   * (e.g. Number of UEs at a given geographical location) by the SCEF,
+   * is not served by the MME/SGSN.
+   */
+  int DIAMETER_ERROR_REQUESTED_LOCATION_NOT_SERVED = 5650;
+
+  /**
+   * This result code shall be sent by the SCEF or the MME/SGSN
+   * to indicate that the user identified by the IMSI is unknown.
+   * This error code is defined in 3GPP TS 29.229 [4].
+   */
+  int DIAMETER_ERROR_USER_UNKNOWN = 5001;
+
+  /**
+   * This result code shall be sent by the SCEF to indicate that the operation is not allowed
+   * when an EPS bearer context exists for the user.
+   * This error code is defined in 3GPP TS 29.329 [17].
+   *
+   * This result code shall be sent by the SCEF or the MME/SGSN to indicate that
+   * the requested T6a/b connection action is not allowed.
+   *
+   */
+  int DIAMETER_ERROR_OPERATION_NOT_ALLOWED = 5101;
+
+
+  /**
+   * This result code shall be sent by the SCEF or the MME/SGSN to indicate that there
+   * is no bearer context for the user.
+   */
+  int DIAMETER_ERROR_INVALID_EPS_BEARER = 5651;
+
+  /**
+   * This result code shall be sent by the SCEF to indicate that there is no valid NIDD configuration available.
+   */
+  int DIAMETER_ERROR_NIDD_CONFIGURATION_NOT_AVAILABLE = 5652;
+
+  /**
+   * This result code shall be sent by the SCEF to indicate that the SCEF reference ID is not known by the SCEF.
+   */
+  int DIAMETER_ERROR_SCEF_REFERENCE_ID_UNKNOWN = 5515;
+
+  /**
+   * This result code shall be sent by the HSS to indicate that the APN is not authorized for an UE.
+   */
+  int DIAMETER_ERROR_USER_NO_APN_SUBSCRIPTION = 5451;
+
+  /**
+   * This result code shall be sent by the MME or SGSN to indicate that the
+   * UE is temporarily not reachable due to a power saving function,
+   * and that the MME or SGSN will update the SCEF when it detects that
+   * the UE is reachable or about to become reachable as specified in subclause 5.6.3.
+   */
+  int DIAMETER_ERROR_USER_TEMPORARILY_UNREACHABLE = 5653;
+
+  /**
+   * This result code shall be sent by the MME to indicate that the UE is not reachable.
+   * This error code is defined in 3GPP TS 29.172 [26].
+   */
+  int DIAMETER_ERROR_UNREACHABLE_USER = 4221;
+
+
+
 }

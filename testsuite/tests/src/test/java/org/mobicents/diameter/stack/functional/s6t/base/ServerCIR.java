@@ -9,6 +9,7 @@ import org.jdiameter.api.IllegalDiameterStateException;
 import org.jdiameter.api.InternalException;
 import org.jdiameter.api.OverloadException;
 import org.jdiameter.api.RouteException;
+import org.jdiameter.api.ResultCode;
 
 import org.jdiameter.api.s6t.ServerS6tSession;
 import org.jdiameter.api.s6t.events.JConfigurationInformationAnswer;
@@ -41,13 +42,45 @@ public class ServerCIR extends AbstractServer {
       throw new Exception("S6t Did't got Configuration-Information-Request (CIR) or Configuration-Information-Answer (CIA) already sent. Request: " + this.request);
     }
 
-    JConfigurationInformationAnswer answer = new JConfigurationInformationAnswerImpl((Request) this.request.getMessage(), 2001);
+    JConfigurationInformationAnswer answer = new JConfigurationInformationAnswerImpl((Request) this.request.getMessage(), ResultCode.SUCCESS);
 
     AvpSet reqSet = request.getMessage().getAvps();
     AvpSet set = answer.getMessage().getAvps();
     set.removeAvp(Avp.DESTINATION_HOST);
     set.removeAvp(Avp.DESTINATION_REALM);
 
+
+    AvpSet monitoringEvents = reqSet.getAvps(Avp.MONITORING_EVENT_CONFIGURATION);
+
+
+    StringBuffer str = new StringBuffer("");
+    for (Avp avp: monitoringEvents) {
+      str.setLength(0);
+      AvpSet monEv = set.addGroupedAvp(Avp.MONITORING_EVENT_REPORT, getApplicationId().getVendorId(),true, false);
+      for (Avp a: avp.getGrouped()) {
+        if (a.getCode() == Avp.SCEF_REFERENCE_ID) {
+          monEv.addAvp(a);
+          if (log.isInfoEnabled()) {
+            str.append(" SCEF_REFERENCE_ID : ").append(a.getInteger32()).append("\n");
+          }
+        }
+        if (a.getCode() == Avp.SCEF_ID) {
+          monEv.addAvp(a);
+          if (log.isInfoEnabled()) {
+            str.append(new StringBuffer("SCEF_ID : ")).append(a.getDiameterIdentity()).append("\n");
+          }
+        }
+        if (a.getCode() == Avp.MONITORING_TYPE) {
+          monEv.addAvp(a);
+          if (log.isInfoEnabled()) {
+            str.append(new StringBuffer("MONITORING_TYPE : ")).append(a.getInteger32()).append("\n");
+          }
+        }
+      }
+      if (log.isInfoEnabled()) {
+        log.info(str.toString());
+      }
+      }
 
     set.addAvp(reqSet.getAvp(Avp.CC_REQUEST_TYPE), reqSet.getAvp(Avp.CC_REQUEST_NUMBER), reqSet.getAvp(Avp.AUTH_APPLICATION_ID));
 
@@ -64,6 +97,9 @@ public class ServerCIR extends AbstractServer {
       vendorSpecificApplicationId.addAvp(Avp.AUTH_APPLICATION_ID, getApplicationId().getAuthAppId(), true);
     }
     // [ Result-Code ]
+    if (set.getAvp(Avp.RESULT_CODE) == null) {
+      set.addAvp(Avp.RESULT_CODE, ResultCode.SUCCESS);
+    }
     // [ Experimental-Result ]
     // { Auth-Session-State }
     if (set.getAvp(Avp.AUTH_SESSION_STATE) == null) {

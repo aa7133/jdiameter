@@ -20,6 +20,8 @@ import org.jdiameter.api.Stack;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
@@ -27,6 +29,7 @@ import org.junit.runners.Parameterized.Parameters;
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
+@RunWith(Parameterized.class)
 public class T6aSessionBasicFlowClientCIRTest {
   private ClientSendCIR clientNode;
   private ServerRecvCIR serverNode1;

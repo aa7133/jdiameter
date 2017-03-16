@@ -42,7 +42,7 @@ public class AbstractServer extends TBase implements ServerT6aSessionListener {
 
   public void init(InputStream configStream, String clientID) throws Exception {
     try {
-      super.init(configStream, clientID, ApplicationId.createByAuthAppId(10415, 16777345));
+      super.init(configStream, clientID, ApplicationId.createByAuthAppId(10415, 16777346));
       T6aSessionFactoryImpl t6aSessionFactory = new T6aSessionFactoryImpl(this.sessionFactory);
       sessionFactory.registerAppFacory(ServerT6aSession.class, t6aSessionFactory);
       sessionFactory.registerAppFacory(ClientT6aSession.class, t6aSessionFactory);

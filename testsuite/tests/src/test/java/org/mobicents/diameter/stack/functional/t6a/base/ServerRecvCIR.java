@@ -1,4 +1,5 @@
-package org.mobicents.diameter.stack.functional.s6t.base;
+package org.mobicents.diameter.stack.functional.t6a.base;
+
 
 import org.jdiameter.api.Answer;
 import org.jdiameter.api.Avp;
@@ -11,19 +12,19 @@ import org.jdiameter.api.OverloadException;
 import org.jdiameter.api.RouteException;
 import org.jdiameter.api.ResultCode;
 
-import org.jdiameter.api.s6t.ServerS6tSession;
-import org.jdiameter.api.s6t.events.JConfigurationInformationAnswer;
-import org.jdiameter.api.s6t.events.JConfigurationInformationRequest;
-import org.jdiameter.common.impl.app.s6t.JConfigurationInformationAnswerImpl;
+import org.jdiameter.api.t6a.ServerT6aSession;
+import org.jdiameter.api.t6a.events.JConfigurationInformationAnswer;
+import org.jdiameter.api.t6a.events.JConfigurationInformationRequest;
+import org.jdiameter.common.impl.app.t6a.JConfigurationInformationAnswerImpl;
 import org.mobicents.diameter.stack.functional.Utils;
-import org.mobicents.diameter.stack.functional.s6t.AbstractServer;
+import org.mobicents.diameter.stack.functional.t6a.AbstractServer;
 
 /**
- * Created by Adi Enzel on 3/7/17.
+ * Created by Adi Enzel on 3/16/17.
  *
- *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public class ServerCIR extends AbstractServer {
+public class ServerRecvCIR extends AbstractServer {
 
   protected boolean receivedConfigurationInfo;
   protected boolean sentConfigurationInfo;
@@ -33,13 +34,13 @@ public class ServerCIR extends AbstractServer {
   /**
    *
    */
-  public ServerCIR() {
+  public ServerRecvCIR() {
   }
 
   public void sendConfigurationInformationAnswer() throws Exception {
     if (!receivedConfigurationInfo || request == null) {
-      fail("S6t Did't got Configuration-Information-Request (CIR) or Configuration-Information-Answer (CIA) already sent.", null);
-      throw new Exception("S6t Did't got Configuration-Information-Request (CIR) or Configuration-Information-Answer (CIA) already sent. Request: " + this.request);
+      fail("T6a Did't got Configuration-Information-Request (CIR) or Configuration-Information-Answer (CIA) already sent.", null);
+      throw new Exception("T6a Did't got Configuration-Information-Request (CIR) or Configuration-Information-Answer (CIA) already sent. Request: " + this.request);
     }
 
     JConfigurationInformationAnswer answer = new JConfigurationInformationAnswerImpl((Request) this.request.getMessage(), ResultCode.SUCCESS);
@@ -61,26 +62,26 @@ public class ServerCIR extends AbstractServer {
         if (a.getCode() == Avp.SCEF_REFERENCE_ID) {
           monEv.addAvp(a);
           if (log.isInfoEnabled()) {
-            str.append("\t SCEF_REFERENCE_ID : ").append(a.getInteger32()).append("\n");
+            str.append(" SCEF_REFERENCE_ID : ").append(a.getInteger32()).append("\n");
           }
         }
         if (a.getCode() == Avp.SCEF_ID) {
           monEv.addAvp(a);
           if (log.isInfoEnabled()) {
-            str.append(new StringBuffer("\tSCEF_ID : ")).append(a.getDiameterIdentity()).append("\n");
+            str.append(new StringBuffer("SCEF_ID : ")).append(a.getDiameterIdentity()).append("\n");
           }
         }
         if (a.getCode() == Avp.MONITORING_TYPE) {
           monEv.addAvp(a);
           if (log.isInfoEnabled()) {
-            str.append(new StringBuffer("\tMONITORING_TYPE : ")).append(a.getInteger32()).append("\n");
+            str.append(new StringBuffer("MONITORING_TYPE : ")).append(a.getInteger32()).append("\n");
           }
         }
       }
       if (log.isInfoEnabled()) {
         log.info(str.toString());
       }
-      }
+    }
 
     set.addAvp(reqSet.getAvp(Avp.CC_REQUEST_TYPE), reqSet.getAvp(Avp.CC_REQUEST_NUMBER), reqSet.getAvp(Avp.AUTH_APPLICATION_ID));
 
@@ -116,7 +117,7 @@ public class ServerCIR extends AbstractServer {
     // *[ Failed-AVP ]
     // *[ Proxy-Info ]
     // *[ Route-Record ]
-    this.serverS6tSession.sendConfigurationInformationAnswer(answer);
+    this.serverT6aSession.sendConfigurationInformationAnswer(answer);
     Utils.printMessage(log, super.stack.getDictionary(), answer.getMessage(), true);
     this.request = null;
     this.sentConfigurationInfo = true;
@@ -126,17 +127,17 @@ public class ServerCIR extends AbstractServer {
   public Answer processRequest(Request request) {
     int code = request.getCommandCode();
     if (code != JConfigurationInformationRequest.code) {
-      fail("Received Request with code not used by S6t!. Code[" + request.getCommandCode() + "]", null);
+      fail("Received Request with code not used by T6a. Code[" + request.getCommandCode() + "]", null);
       return null;
     }
-    if (super.serverS6tSession != null) {
+    if (super.serverT6aSession != null) {
       // do fail?
       fail("Received Request in base listener, not in app specific!" + code, null);
     }
     else {
       try {
-        super.serverS6tSession = this.sessionFactory.getNewAppSession(request.getSessionId(), getApplicationId(), ServerS6tSession.class, (Object) null);
-        ((NetworkReqListener) this.serverS6tSession).processRequest(request);
+        super.serverT6aSession = this.sessionFactory.getNewAppSession(request.getSessionId(), getApplicationId(), ServerT6aSession.class, (Object) null);
+        ((NetworkReqListener) this.serverT6aSession).processRequest(request);
       }
       catch (Exception e) {
         e.printStackTrace();
@@ -148,8 +149,8 @@ public class ServerCIR extends AbstractServer {
   }
 
   @Override
-  public void doConfigurationInformationRequestEvent(ServerS6tSession session, JConfigurationInformationRequest request)
-      throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
+  public void doSendConfigurationInformationRequestEvent(ServerT6aSession session, JConfigurationInformationRequest request)
+        throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
     if (this.receivedConfigurationInfo) {
       fail("Received Configuration-Information-Request (CIR) more than once", null);
       return;
@@ -166,5 +167,6 @@ public class ServerCIR extends AbstractServer {
   public boolean isSentConfigurationInfo() {
     return sentConfigurationInfo;
   }
+
 
 }

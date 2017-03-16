@@ -1,4 +1,5 @@
-package org.mobicents.diameter.stack.functional.s6t.base;
+package org.mobicents.diameter.stack.functional.t6a.base;
+
 
 import static org.junit.Assert.fail;
 
@@ -19,20 +20,16 @@ import org.jdiameter.api.Stack;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-
 /**
- * Created by Adi Enzel on 3/8/17.
+ * Created by Adi Enzel on 3/16/17.
  *
- *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-@RunWith(Parameterized.class)
-public class S6tSessionBasicFlowCIRTest {
-  private ClientCIR clientNode;
-  private ServerCIR serverNode1;
+public class T6aSessionBasicFlowClientCIRTest {
+  private ClientSendCIR clientNode;
+  private ServerRecvCIR serverNode1;
   private URI clientConfigURI;
   private URI serverNode1ConfigURI;
 
@@ -43,7 +40,7 @@ public class S6tSessionBasicFlowCIRTest {
    * @param serverNode1ConfigURL
    * @throws Exception
    */
-  public S6tSessionBasicFlowCIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
+  public T6aSessionBasicFlowClientCIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
     super();
     this.clientConfigURI = new URI(clientConfigUrl);
     this.serverNode1ConfigURI = new URI(serverNode1ConfigURL);
@@ -52,8 +49,8 @@ public class S6tSessionBasicFlowCIRTest {
   @Before
   public void setUp() throws Exception {
     try {
-      this.clientNode = new ClientCIR();
-      this.serverNode1 = new ServerCIR();
+      this.clientNode = new ClientSendCIR();
+      this.serverNode1 = new ServerRecvCIR();
 
       this.serverNode1.init(new FileInputStream(new File(this.serverNode1ConfigURI)), "SERVER1");
       this.serverNode1.start();
@@ -71,10 +68,7 @@ public class S6tSessionBasicFlowCIRTest {
         for (Peer p : peers) {
           if (p.getState(PeerState.class).equals(PeerState.OKAY)) {
             if (foundConnected) {
-              throw new Exception("Wrong number of connected peers: " + peers);   //String replicatedClient = "configurations/functional-s6t/replicated-config-client.xml";
-    //String replicatedServer1 = "configurations/functional-s6t/replicated-config-server-node1.xml";
-
-
+              throw new Exception("Wrong number of connected peers: " + peers);
             }
             foundConnected = true;
           }
@@ -158,17 +152,12 @@ public class S6tSessionBasicFlowCIRTest {
   @Parameters
   public static Collection<Object[]> data() {
 
-    String client = "configurations/functional-s6t/config-client.xml";
-    String server1 = "configurations/functional-s6t/config-server-node1.xml";
+    String client = "configurations/functional-t6a/config-client.xml";
+    String server1 = "configurations/functional-t6a/config-server-node1.xml";
 
-    //String replicatedClient = "configurations/functional-s6t/replicated-config-client.xml";
-    //String replicatedServer1 = "configurations/functional-s6t/replicated-config-server-node1.xml";
-
-    Class<S6tSessionBasicFlowCIRTest> t = S6tSessionBasicFlowCIRTest.class;
+    Class<T6aSessionBasicFlowClientCIRTest> t = T6aSessionBasicFlowClientCIRTest.class;
     client = t.getClassLoader().getResource(client).toString();
     server1 = t.getClassLoader().getResource(server1).toString();
-    // replicatedClient = t.getClassLoader().getResource(replicatedClient).toString();
-    //replicatedServer1 = t.getClassLoader().getResource(replicatedServer1).toString();
 
     return Arrays.asList(new Object[][] { { client, server1 }/*, { replicatedClient, replicatedServer1 } */});
   }

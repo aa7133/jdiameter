@@ -31,11 +31,11 @@ import static org.jdiameter.client.impl.helpers.Parameters.OwnIPAddress;
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public class ClienSendCIR extends AbstractClient {
+public class ClientSendCIR extends AbstractClient {
   protected boolean receivedConfiguratinInfo;
   protected boolean sentConfigurationInfo;
 
-  public ClienSendCIR() {
+  public ClientSendCIR() {
 
   }
 

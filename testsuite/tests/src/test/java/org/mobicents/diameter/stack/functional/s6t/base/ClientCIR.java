@@ -120,6 +120,67 @@ public class ClientCIR extends AbstractClient{
       return;
     }
 
+    StringBuffer str = new StringBuffer("");
+    boolean session_id = false;
+    boolean auth_sessin_state = false;
+    boolean orig_host = false;
+    boolean orig_relm = false;
+    try {
+      for (Avp a : answer.getMessage().getAvps()) {
+        switch (a.getCode()) {
+          case Avp.SESSION_ID:
+            session_id = true;
+            str.append("SESSION_ID : ").append(a.getUTF8String()).append("\n");
+            break;
+          case Avp.DRMP:
+            break;
+          case Avp.RESULT_CODE:
+            break;
+          case Avp.EXPERIMENTAL_RESULT:
+            break;
+          case Avp.AUTH_SESSION_STATE:
+            auth_sessin_state = true;
+            break;
+          case Avp.ORIGIN_HOST:
+            orig_host = true;
+            break;
+          case Avp.ORIGIN_REALM:
+            orig_relm = true;
+          case Avp.OC_SUPPORTED_FEATURES:
+            break;
+          case Avp.OC_OLR:
+            break;
+          case Avp.SUPPORTED_FEATURES: // grouped
+            break;
+          case Avp.USER_IDENTIFIER:
+            break;
+          case Avp.MONITORING_EVENT_REPORT: // grouped
+            break;
+          case Avp.MONITORING_EVENT_CONFIG_STATUS: //Grouped
+            break;
+          case Avp.AESE_COMMUNICATION_PATTEREN_CONFIG_STATUS: // Grouped
+            break;
+          case Avp.SUPPORTED_SERVICES: // Grouped
+            break;
+          case Avp.S6T_HSS_CAUSE:
+            break;
+          case Avp.FAILED_AVP: // Grouped
+            break;
+          case Avp.PROXY_INFO: // Grouped
+            break;
+          case Avp.ROUTE_RECORD: // Grouped
+            break;
+          default: // got Extra AVP'S
+            break;
+        }
+
+      }
+    } catch (AvpDataException e) {
+      e.printStackTrace();
+    }
+
+    log.info(str.toString());
+
     this.receivedConfiguratinInfo = true;
   }
 

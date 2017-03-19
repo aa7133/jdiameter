@@ -8,8 +8,6 @@ import org.jdiameter.common.impl.app.s6t.JConfigurationInformationRequestImpl;
 import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.s6t.AbstractClient;
 import org.mobicents.diameter.stack.functional.s6t.BCDStringConverter;
-import org.mobicents.diameter.stack.functional.s6t.S6tMonitoringType;
-import sun.font.TrueTypeFont;
 
 import static org.jdiameter.client.impl.helpers.Parameters.OwnDiameterURI;
 
@@ -20,8 +18,20 @@ public class ClientCIR extends AbstractClient{
   protected boolean receivedConfiguratinInfo;
   protected boolean sentConfigurationInfo;
 
+
   public ClientCIR() {
 
+  }
+
+  private class MonitoringType {
+    public static final int LOSS_OF_CONNECTIVITY = 0;
+    public static final int UE_REACHABILITY = 1;
+    public static final int LOCATION_REPORTING = 2;
+    public static final int CHANGE_OF_IMSI_IMEI_ASSOCIATION = 3;
+    public static final int ROAMING_STATUS = 4;
+    public static final int COMMUNICATION_FAILURE = 5;
+    public static final int AVAILABILITY_AFTER_DDN_FAILURE = 6;
+    public static final int NUMBER_OF_UES_PRESENT_IN_A_GEOGRAPHICAL_AREA = 7;
   }
 
   public void sendConfigurationInformationRequest()  throws Exception {
@@ -55,49 +65,49 @@ public class ClientCIR extends AbstractClient{
     AvpSet monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 1, getApplicationId().getVendorId(), true, false, true);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, this.stack.getConfiguration().getStringValue(OwnDiameterURI.ordinal(), "aaa://12.12.12.12:3344"), getApplicationId().getVendorId(), true, false, false);
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.AVAILABILITY_AFTER_DDN_FAILURE, getApplicationId().getVendorId(), true, false, true);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.AVAILABILITY_AFTER_DDN_FAILURE, getApplicationId().getVendorId(), true, false, true);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 200, getApplicationId().getVendorId(), true, false, true);
 
     monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 2, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, "aaa://12.12.12.12:3344", getApplicationId().getVendorId(), true, false, true);
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.LOCATION_REPORTING, getApplicationId().getVendorId(), true, false);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.LOCATION_REPORTING, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 1200, getApplicationId().getVendorId(), true, false);
 
     monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 3, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, "aaa://120.120.125.125:3344", getApplicationId().getVendorId(), true, false, true);
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.CHANGE_OF_IMSI_IMEI_ASSOCIATION, getApplicationId().getVendorId(), true, false);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.CHANGE_OF_IMSI_IMEI_ASSOCIATION, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 5000, getApplicationId().getVendorId(), true, false);
 
     monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 4, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, this.stack.getConfiguration().getStringValue(OwnDiameterURI.ordinal(), "aaa://12.12.12.12:3344"), getApplicationId().getVendorId(), true, false, false );
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.LOSS_OF_CONNECTIVITY, getApplicationId().getVendorId(), true, false);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.LOSS_OF_CONNECTIVITY, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 300, getApplicationId().getVendorId(), true, false);
 
     monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 5, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, this.stack.getConfiguration().getStringValue(OwnDiameterURI.ordinal(), "aaa://12.12.12.12:3344"), getApplicationId().getVendorId(), true, false, false );
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.COMMUNICATION_FAILURE, getApplicationId().getVendorId(), true, false);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.COMMUNICATION_FAILURE, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 700, getApplicationId().getVendorId(), true, false);
 
     monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 6, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, this.stack.getConfiguration().getStringValue(OwnDiameterURI.ordinal(), "aaa://12.12.12.12:3344"), getApplicationId().getVendorId(), true, false, false );
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.UE_REACHABILITY, getApplicationId().getVendorId(), true, false);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.UE_REACHABILITY, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 400, getApplicationId().getVendorId(), true, false);
 
     monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION, getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 7, getApplicationId().getVendorId(), true, false, true);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, this.stack.getConfiguration().getStringValue(OwnDiameterURI.ordinal(), "aaa://12.12.12.12:3344"), getApplicationId().getVendorId(), true, false, false );
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.ROAMING_STATUS, getApplicationId().getVendorId(), true, false);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.ROAMING_STATUS, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 2000, getApplicationId().getVendorId(), true, false);
 
     monitoringEventConfig = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_CONFIGURATION,getApplicationId().getVendorId(),true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_REFERENCE_ID, 8, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.SCEF_ID, this.stack.getConfiguration().getStringValue(OwnDiameterURI.ordinal(), "aaa://12.12.12.12:3344"), getApplicationId().getVendorId(), true, false, false );
-    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, S6tMonitoringType.NUMBER_OF_UES_PRESENT_IN_A_GEOGRAPHICAL_AREA, getApplicationId().getVendorId(), true, false);
+    monitoringEventConfig.addAvp(Avp.MONITORING_TYPE, MonitoringType.NUMBER_OF_UES_PRESENT_IN_A_GEOGRAPHICAL_AREA, getApplicationId().getVendorId(), true, false);
     monitoringEventConfig.addAvp(Avp.MAXIMUM_NUMBER_OF_REPORTS, 10000, getApplicationId().getVendorId(), true, false);
 
     //[ CIR-Flags ]
@@ -133,10 +143,13 @@ public class ClientCIR extends AbstractClient{
             str.append("SESSION_ID : ").append(a.getUTF8String()).append("\n");
             break;
           case Avp.DRMP:
+            str.append("\tDRMP : ").append(a.getUTF8String()).append("\n");
             break;
           case Avp.RESULT_CODE:
+            str.append("\tRESULT_CODE : ").append(a.getUTF8String()).append("\n");
             break;
           case Avp.EXPERIMENTAL_RESULT:
+            str.append("\tEXPERIMENTAL_RESULT : ").append(a.getUTF8String()).append("\n");
             break;
           case Avp.AUTH_SESSION_STATE:
             auth_sessin_state = true;

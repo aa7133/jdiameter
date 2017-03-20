@@ -39,9 +39,9 @@ public class T6aSessionBasicFlowClientCIRTest {
 
   /**
    *
-   * @param clientConfigUrl
-   * @param serverNode1ConfigURL
-   * @throws Exception
+   * @param clientConfigUrl String
+   * @param serverNode1ConfigURL String
+   * @throws Exception General exception
    */
   public T6aSessionBasicFlowClientCIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
     super();
@@ -62,7 +62,7 @@ public class T6aSessionBasicFlowClientCIRTest {
       this.clientNode.start(Mode.ANY_PEER, 10, TimeUnit.SECONDS);
       Stack stack = this.clientNode.getStack();
       List<Peer> peers = stack.unwrap(PeerTable.class).getPeerTable();
-      if (peers.size() == 1) {
+       if (peers.size() == 1) {
         // ok
       }
       else if (peers.size() > 1) {
@@ -125,13 +125,13 @@ public class T6aSessionBasicFlowClientCIRTest {
     }
 
     if (!serverNode1.isReceivedConfigurationInfo()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIR! ");
+      StringBuilder sb = new StringBuilder("Did not receive CIR! ");
       sb.append("Server ER:\n").append(serverNode1.createErrorReport(this.serverNode1.getErrors()));
 
       fail(sb.toString());
     }
     if (!clientNode.isReceivedConfigurationInfo()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIA! ");
+      StringBuilder sb = new StringBuilder("Did not receive CIA! ");
       sb.append("Client ER:\n").append(clientNode.createErrorReport(this.clientNode.getErrors()));
 
       fail(sb.toString());

@@ -1,17 +1,11 @@
 package org.mobicents.diameter.stack.functional.t6a.base;
 
-import org.jdiameter.api.ApplicationId;
-import org.jdiameter.api.Avp;
-import org.jdiameter.api.AvpSet;
-import org.jdiameter.api.IllegalDiameterStateException;
-import org.jdiameter.api.InternalException;
-import org.jdiameter.api.OverloadException;
-import org.jdiameter.api.RouteException;
+import org.jdiameter.api.*;
 import org.jdiameter.api.t6a.ClientT6aSession;
 import org.jdiameter.api.t6a.ServerT6aSession;
-import org.jdiameter.api.t6a.events.JConnectionManagementAnswer;
-import org.jdiameter.api.t6a.events.JConnectionManagementRequest;
-import org.jdiameter.common.impl.app.t6a.JConnectionManagementRequestImpl;
+import org.jdiameter.api.t6a.events.JMT_DataAnswer;
+import org.jdiameter.api.t6a.events.JMT_DataRequest;
+import org.jdiameter.common.impl.app.t6a.JMT_DataRequestImpl;
 import org.jdiameter.common.impl.app.t6a.T6aSessionFactoryImpl;
 import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.t6a.AbstractServer;
@@ -23,11 +17,11 @@ import java.io.InputStream;
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public class ServerSendCMR extends AbstractServer {
-  private boolean receivedConnectionManagement;
-  private boolean sentConnectionManagement;
+public class ServerSendTDR extends AbstractServer {
+  private boolean receivedMTData;
+  private boolean sentMTData;
 
-  protected ServerSendCMR() {
+  protected ServerSendTDR() {
   }
 
   @Override
@@ -50,10 +44,10 @@ public class ServerSendCMR extends AbstractServer {
     }
   }
 
-  protected void sendConnectionManagementRequest() throws Exception {
+  protected void sendMTDataRequest() throws Exception {
 
-    JConnectionManagementRequest request =
-          new JConnectionManagementRequestImpl(super.createRequest(this.serverT6aSession, JConnectionManagementRequest.code));
+    JMT_DataRequest request =
+          new JMT_DataRequestImpl(super.createRequest(this.serverT6aSession, JMT_DataRequest.code));
     AvpSet reqSet = request.getMessage().getAvps();
 
     Avp vid = reqSet.getAvp(Avp.VENDOR_SPECIFIC_APPLICATION_ID);
@@ -72,69 +66,60 @@ public class ServerSendCMR extends AbstractServer {
     Avp origHost = reqSet.getAvp(Avp.ORIGIN_HOST);
     reqSet.removeAvp(Avp.ORIGIN_HOST);
 
-
-    //TODO set values for Connection-Management-Request
-    //< Connection-Management-Request > ::=   < Diameter Header: 8388732, PXY, 16777346 >
-    //< Session-Id >
-    //< User-Identifier >
+    //< MT-Data-Request > ::=   < Diameter Header: 8388734, PXY, 16777346 >
+    // < Session-Id >
+    // < User-Identifier >
     AvpSet userIdentifier = reqSet.addGroupedAvp(Avp.USER_IDENTIFIER, getApplicationId().getVendorId(), true, false);
     //add to group
     userIdentifier.addAvp(Avp.EXTERNAL_IDENTIFIER, "kuku@stam.com", getApplicationId().getVendorId(), true, false, false);
-    //< Bearer-Identifier >
+    // < Bearer-Identifier >
     reqSet.addAvp(Avp.BEARER_IDENTIFIER, "kukuriku.com", getApplicationId().getVendorId(), true, false, false);
 
     reqSet.addAvp(vid);
-    //[ DRMP ]
-    //{ Auth-Session-State }
+    // [ DRMP ]
+    // { Auth-Session-State }
     reqSet.addAvp(authSessionState);
-    //{ Origin-Host }
+    // { Origin-Host }
     reqSet.addAvp(origHost);
-    //{ Origin-Realm }
+    // { Origin-Realm }
     reqSet.addAvp(origRelm);
-    //[ Destination-Host ]
-    //{ Destination-Realm }
+    // [ Destination-Host ]
+    // { Destination-Realm }
     reqSet.addAvp(destRelm);
-    //[ OC-Supported-Features ]
-    //[ CMR-Flags ]
-    //[ Maximum-UE-Availability-Time ]
-    //*[ Supported-Features ]
-    //[ Connection-Action ]
-    //[ Service-Selection ]
-    //[ Serving-PLMN-Rate-Control ]
-    //[ Extended-PCO ]
-    //[ 3GPP-Charging-Characteristics ]
-    //[ RAT-Type ]
-    //[ Terminal-Information ]
-    //[ Visited-PLMN-Id ]
-    //*[ Failed-AVP ]
-    //*[ Proxy-Info ]
-    //*[ Route-Record ]
-    //*[AVP]
+    // [ OC-Supported-Features ]
+    // *[ Supported-Features ]
+    // [ Non-IP-Data ]
+    reqSet.addAvp(Avp.NON_IP_DATA, "hello world of IOT data, we got data",
+          getApplicationId().getVendorId(), true, false, true);
+    // [ SCEF-Wait-Time ]
+    // [ Maximum-Retransmission-Time ]
+    // *[ Proxy-Info ]
+    // *[ Route-Record ]
+    // *[AVP]
 
-
-    this.serverT6aSession.sendConnectionManagementRequest(request);
+    this.serverT6aSession.sendMT_DataRequest(request);
     Utils.printMessage(log, super.stack.getDictionary(), request.getMessage(), true);
 
-    this.sentConnectionManagement = true;
+    this.sentMTData = true;
   }
 
   @Override
-  public void doSendConnectionManagementAnswertEvent(ServerT6aSession session, JConnectionManagementRequest request, JConnectionManagementAnswer answer)
+  public void doSendMT_DataAnswertEvent(ServerT6aSession session, JMT_DataRequest request, JMT_DataAnswer answer)
         throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
-    if (this.receivedConnectionManagement) {
-      fail("T6a Received Connection-Management-Answer (CMA) more than once", null);
+    if (this.receivedMTData) {
+      fail("T6a Received MT-Data-Answer (TDA) more than once", null);
       return;
     }
 
-    this.receivedConnectionManagement = true;
+    this.receivedMTData = true;
   }
 
 
-  protected boolean isReceivedConnectionManagement() {
-    return receivedConnectionManagement;
+  protected boolean isReceivedMTData() {
+    return receivedMTData;
   }
 
-  public boolean isSentConnectionManagement() {
-    return sentConnectionManagement;
+  protected boolean isSentMTData() {
+    return sentMTData;
   }
 }

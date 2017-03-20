@@ -34,10 +34,10 @@ public class ServerRecvRIR extends AbstractServer {
 
   protected JReportingInformationRequest request;
 
-  public ServerRecvRIR() {
+  protected ServerRecvRIR() {
   }
 
-  public void sendReportingInformationAnswer() throws Exception {
+  protected void sendReportingInformationAnswer() throws Exception {
     if (!receivedRiportingInformation || request == null) {
       fail("T6a - Did not receive Reporting-Information-Request (RIR) or answer already sent.", null);
       throw new Exception("T6a Did not receive Reporting-Information-Request (NIR) or answer already sent. Request: " + this.request);
@@ -64,6 +64,9 @@ public class ServerRecvRIR extends AbstractServer {
       vendorSpecificApplicationId.addAvp(Avp.AUTH_APPLICATION_ID, getApplicationId().getAuthAppId(), true);
     }
     // [ Result-Code ]
+    if (set.getAvp(Avp.RESULT_CODE) == null) {
+      set.addAvp(Avp.RESULT_CODE, ResultCode.SUCCESS);
+    }
     // [ Experimental-Result ]
     // { Auth-Session-State }
     if (set.getAvp(Avp.AUTH_SESSION_STATE) == null) {
@@ -127,17 +130,17 @@ public class ServerRecvRIR extends AbstractServer {
 
   /**
    * Getter
-   * @return
+   * @return boolean
    */
-  public boolean isReceivedRiportingInformation() {
+  protected boolean isReceivedRiportingInformation() {
     return receivedRiportingInformation;
   }
 
   /**
    * Getter
-   * @return
+   * @return boolean
    */
-  public boolean isSentReportingInformation() {
+  protected boolean isSentReportingInformation() {
     return sentReportingInformation;
   }
 

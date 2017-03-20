@@ -1,16 +1,13 @@
 package org.mobicents.diameter.stack.functional.t6a.base;
 
-import org.jdiameter.api.DisconnectCause;
-import org.jdiameter.api.Mode;
-import org.jdiameter.api.Peer;
-import org.jdiameter.api.PeerState;
-import org.jdiameter.api.PeerTable;
-import org.jdiameter.api.Stack;
+
+import org.jdiameter.api.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,18 +20,25 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 /**
- * Created by Adi Enzel on 3/20/17.
+ * Created by Adi Enzel on 3/16/17.
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 @RunWith(Parameterized.class)
-public class T6aSessionBasicFlowClientRIRTest {
-  private ClientSendRIR clientNode;
-  private ServerRecvRIR serverNode1;
+public class T6aSessionBasicFlowClientODRTest {
+  private ClientSendODR clientNode;
+  private ServerRecvODR serverNode1;
   private URI clientConfigURI;
   private URI serverNode1ConfigURI;
 
-  public T6aSessionBasicFlowClientRIRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
+
+  /**
+   *
+   * @param clientConfigUrl String
+   * @param serverNode1ConfigURL serverNode1ConfigURL
+   * @throws Exception throws general exception
+   */
+  public T6aSessionBasicFlowClientODRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
     super();
     this.clientConfigURI = new URI(clientConfigUrl);
     this.serverNode1ConfigURI = new URI(serverNode1ConfigURL);
@@ -43,8 +47,8 @@ public class T6aSessionBasicFlowClientRIRTest {
   @Before
   public void setUp() throws Exception {
     try {
-      this.clientNode = new ClientSendRIR();
-      this.serverNode1 = new ServerRecvRIR();
+      this.clientNode = new ClientSendODR();
+      this.serverNode1 = new ServerRecvODR();
 
       this.serverNode1.init(new FileInputStream(new File(this.serverNode1ConfigURI)), "SERVER1");
       this.serverNode1.start();
@@ -53,7 +57,6 @@ public class T6aSessionBasicFlowClientRIRTest {
       this.clientNode.start(Mode.ANY_PEER, 10, TimeUnit.SECONDS);
       Stack stack = this.clientNode.getStack();
       List<Peer> peers = stack.unwrap(PeerTable.class).getPeerTable();
-
       if (peers.size() == 1) {
         // ok
       }
@@ -105,10 +108,10 @@ public class T6aSessionBasicFlowClientRIRTest {
   public void testConfigurationInformation() throws Exception {
     try {
       // pain of parameter tests :) ?
-      clientNode.sendReportingInformationRequest();
+      clientNode.sendMobileOrihginatioDatanRequest();
       waitForMessage();
 
-      serverNode1.sendReportingInformationAnswer();
+      serverNode1.sendMODataAnswer();
       waitForMessage();
     }
     catch (Exception e) {
@@ -116,14 +119,14 @@ public class T6aSessionBasicFlowClientRIRTest {
       fail(e.toString());
     }
 
-    if (!serverNode1.isSentReportingInformation()) {
-      StringBuilder sb = new StringBuilder("Did not receive RIR! ");
+    if (!serverNode1.isReceivedMoData()) {
+      StringBuilder sb = new StringBuilder("Did not receive ODR! ");
       sb.append("Server ER:\n").append(serverNode1.createErrorReport(this.serverNode1.getErrors()));
 
       fail(sb.toString());
     }
-    if (!clientNode.isReceivedRiportingInformation()) {
-      StringBuilder sb = new StringBuilder("Did not receive RIA! ");
+    if (!clientNode.isReceivedMobileOriginationData()) {
+      StringBuilder sb = new StringBuilder("Did not receive ODA! ");
       sb.append("Client ER:\n").append(clientNode.createErrorReport(this.clientNode.getErrors()));
 
       fail(sb.toString());
@@ -144,17 +147,17 @@ public class T6aSessionBasicFlowClientRIRTest {
     }
   }
 
-  @Parameterized.Parameters
+  @Parameters
   public static Collection<Object[]> data() {
 
     String client = "configurations/functional-t6a/config-client.xml";
     String server1 = "configurations/functional-t6a/config-server-node1.xml";
 
-    Class<T6aSessionBasicFlowClientCIRTest> t = T6aSessionBasicFlowClientCIRTest.class;
+    Class<T6aSessionBasicFlowClientODRTest> t = T6aSessionBasicFlowClientODRTest.class;
     client = t.getClassLoader().getResource(client).toString();
     server1 = t.getClassLoader().getResource(server1).toString();
 
-    return Arrays.asList(new Object[][]{{client, server1}/*, { replicatedClient, replicatedServer1 } */});
+    return Arrays.asList(new Object[][] { { client, server1 }/*, { replicatedClient, replicatedServer1 } */});
   }
 
   private void waitForMessage() {
@@ -165,6 +168,5 @@ public class T6aSessionBasicFlowClientRIRTest {
       e.printStackTrace();
     }
   }
-
 
 }

@@ -29,12 +29,12 @@ import java.io.InputStream;
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public class ClientRecvCMR extends AbstractClient {
-  protected boolean receivedConnectionManagement;
-  protected boolean sentConnectionManagement;
+  private boolean receivedConnectionManagement;
+  private boolean sentConnectionManagement;
 
   protected JConnectionManagementRequest request;
 
-  public ClientRecvCMR() {
+  protected ClientRecvCMR() {
   }
 
   @Override
@@ -56,7 +56,7 @@ public class ClientRecvCMR extends AbstractClient {
     }
   }
 
-  public void sendConnectionManagementAnswer() throws Exception {
+  protected void sendConnectionManagementAnswer() throws Exception {
     if (!receivedConnectionManagement || request == null) {
       fail("T6a Did not receive Connection-Management-Request (CMR) or answer already sent.", null);
       throw new Exception("T6a Did not receive Connection-Management-Request (CMR) or answer already sent. Request: " + this.request);
@@ -74,6 +74,9 @@ public class ClientRecvCMR extends AbstractClient {
     //< Session-Id >
     //[ DRMP ]
     //[ Result-Code ]
+    if (set.getAvp(Avp.RESULT_CODE) == null) {
+      set.addAvp(Avp.RESULT_CODE, ResultCode.SUCCESS);
+    }
     //[ Experimental-Result ]
     //{ Auth-Session-State }
     if (set.getAvp(Avp.AUTH_SESSION_STATE) == null) {
@@ -134,7 +137,7 @@ public class ClientRecvCMR extends AbstractClient {
     return null;
   }
 
-  public boolean isReceivedConnectionManagement() {
+  protected boolean isReceivedConnectionManagement() {
     return receivedConnectionManagement;
   }
 

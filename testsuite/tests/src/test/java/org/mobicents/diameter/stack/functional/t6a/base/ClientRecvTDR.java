@@ -1,22 +1,12 @@
 package org.mobicents.diameter.stack.functional.t6a.base;
 
 
-import org.jdiameter.api.Answer;
-import org.jdiameter.api.ApplicationId;
-import org.jdiameter.api.Avp;
-import org.jdiameter.api.AvpSet;
-import org.jdiameter.api.IllegalDiameterStateException;
-import org.jdiameter.api.InternalException;
-import org.jdiameter.api.NetworkReqListener;
-import org.jdiameter.api.OverloadException;
-import org.jdiameter.api.Request;
-import org.jdiameter.api.ResultCode;
-import org.jdiameter.api.RouteException;
+import org.jdiameter.api.*;
 import org.jdiameter.api.t6a.ClientT6aSession;
 import org.jdiameter.api.t6a.ServerT6aSession;
-import org.jdiameter.api.t6a.events.JConfigurationInformationAnswer;
-import org.jdiameter.api.t6a.events.JConfigurationInformationRequest;
-import org.jdiameter.common.impl.app.t6a.JConfigurationInformationAnswerImpl;
+import org.jdiameter.api.t6a.events.JMT_DataAnswer;
+import org.jdiameter.api.t6a.events.JMT_DataRequest;
+import org.jdiameter.common.impl.app.t6a.JMT_DataAnswerImpl;
 import org.jdiameter.common.impl.app.t6a.T6aSessionFactoryImpl;
 import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.t6a.AbstractClient;
@@ -28,14 +18,13 @@ import java.io.InputStream;
  *
  * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
-public class ClientRecvCIR extends AbstractClient {
-  private boolean receivedConfigurationInformation;
-  private boolean sentConfigurationInformation;
+public class ClientRecvTDR extends AbstractClient {
+  private boolean receivedMTData;
+  private boolean sentMTData;
 
-  protected JConfigurationInformationRequest request;
+  protected JMT_DataRequest request;
 
-  protected ClientRecvCIR() {
-
+  protected ClientRecvTDR() {
   }
 
   @Override
@@ -57,12 +46,12 @@ public class ClientRecvCIR extends AbstractClient {
     }
   }
 
-  protected void sendConfigurationInformationAnswer() throws Exception {
-    if (!receivedConfigurationInformation || request == null) {
-      fail("T6a Did not receive CIR or answer already sent.", null);
-      throw new Exception("T6a Did not receive CIR or answer already sent. Request: " + this.request);
+  protected void sendMTDataAnswer() throws Exception {
+    if (!receivedMTData || request == null) {
+      fail("T6a Did not receive MT-Data-Request (TDR) or answer already sent.", null);
+      throw new Exception("T6a Did not receive MT-Data-Request (TDR) or answer already sent. Request: " + this.request);
     }
-    JConfigurationInformationAnswer answer = new JConfigurationInformationAnswerImpl((Request) this.request.getMessage(), ResultCode.SUCCESS);
+    JMT_DataAnswer answer = new JMT_DataAnswerImpl((Request) this.request.getMessage(), ResultCode.SUCCESS);
 
     AvpSet reqSet = request.getMessage().getAvps();
 
@@ -71,16 +60,10 @@ public class ClientRecvCIR extends AbstractClient {
     set.removeAvp(Avp.DESTINATION_REALM);
     set.addAvp(reqSet.getAvp(Avp.CC_REQUEST_TYPE), reqSet.getAvp(Avp.CC_REQUEST_NUMBER), reqSet.getAvp(Avp.AUTH_APPLICATION_ID));
 
-    // <Configuration-Information-Answer> ::= < Diameter Header: , PXY, 16777346 >
+
+    //< MT-Data-Answer > ::=  	< Diameter Header: 8388734, PXY, 16777346 >
     // < Session-Id >
-    // { Vendor-Specific-Application-Id }
-    if (set.getAvp(Avp.VENDOR_SPECIFIC_APPLICATION_ID) == null) {
-      AvpSet vendorSpecificApplicationId = set.addGroupedAvp(Avp.VENDOR_SPECIFIC_APPLICATION_ID, 0, false, false);
-      // 1* [ Vendor-Id ]
-      vendorSpecificApplicationId.addAvp(Avp.VENDOR_ID, getApplicationId().getVendorId(), true);
-      // 0*1{ Auth-Application-Id }
-      vendorSpecificApplicationId.addAvp(Avp.AUTH_APPLICATION_ID, getApplicationId().getAuthAppId(), true);
-    }
+    // [ DRMP ]
     // [ Result-Code ]
     if (set.getAvp(Avp.RESULT_CODE) == null) {
       set.addAvp(Avp.RESULT_CODE, ResultCode.SUCCESS);
@@ -92,32 +75,38 @@ public class ClientRecvCIR extends AbstractClient {
     }
     // { Origin-Host }
     // { Origin-Realm }
-    // [ Associated-Identities ]
+    // [ OC-Supported-Features ]
+    // [ OC-OLR ]
+    // *[ Load ]
+    // [ Requested-Retransmission-Time ]
     // *[ Supported-Features ]
-    // *[ AVP ]
-    // *[ Failed-AVP ]
-    this.clientT6aSession.sendConfigurationInformationAnswer(answer);
+    // [ Failed-AVP ]
+    // *[ Proxy-Info ]
+    // *[ Route-Record ]
+    // *[AVP]
+
+    this.clientT6aSession.sendMTDataAnswer(answer);
     Utils.printMessage(log, super.stack.getDictionary(), answer.getMessage(), true);
     this.request = null;
-    this.sentConfigurationInformation = true;
+    this.sentMTData = true;
   }
 
 
   @Override
-  public void doConfigurationInformationRequestEvent(ClientT6aSession session, JConfigurationInformationRequest request)
+  public void doMT_DataRequestEvent(ClientT6aSession session, JMT_DataRequest request)
         throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
-    if (this.receivedConfigurationInformation) {
-      fail("T6a Received Configuration-Information-Request(CIR) more than once", null);
+    if (this.receivedMTData) {
+      fail("T6a Received MT-Data-Request (TDR) more than once", null);
       return;
     }
-    this.receivedConfigurationInformation = true;
+    this.receivedMTData = true;
     this.request = request;
   }
 
   @Override
   public Answer processRequest(Request request) {
     int code = request.getCommandCode();
-    if (code != JConfigurationInformationRequest.code) {
+    if (code != JMT_DataRequest.code) {
       fail("T6a Received Request with code not used by T6a!. Code[" + request.getCommandCode() + "]", null);
       return null;
     }
@@ -138,12 +127,12 @@ public class ClientRecvCIR extends AbstractClient {
     return null;
   }
 
-  protected boolean isReceivedConfigurationInformation() {
-    return receivedConfigurationInformation;
+  protected boolean isReceivedMTData() {
+    return receivedMTData;
   }
 
-  public boolean isSentConfigurationInformation() {
-    return sentConfigurationInformation;
+  protected boolean isSentMTData() {
+    return sentMTData;
   }
 
 }

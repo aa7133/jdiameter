@@ -39,9 +39,9 @@ public class T6aSessionBasicFlowClientCMRTest {
 
   /**
    *
-   * @param clientConfigUrl
-   * @param serverNode1ConfigURL
-   * @throws Exception
+   * @param clientConfigUrl String
+   * @param serverNode1ConfigURL String
+   * @throws Exception general exception
    */
   public T6aSessionBasicFlowClientCMRTest(String clientConfigUrl, String serverNode1ConfigURL) throws Exception {
     super();
@@ -125,13 +125,13 @@ public class T6aSessionBasicFlowClientCMRTest {
     }
 
     if (!serverNode1.isReceivedConnectionManagement()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIR! ");
+      StringBuilder sb = new StringBuilder("Did not receive CMR! ");
       sb.append("Server ER:\n").append(serverNode1.createErrorReport(this.serverNode1.getErrors()));
 
       fail(sb.toString());
     }
     if (!clientNode.isReceivedConnnectionManagement()) {
-      StringBuilder sb = new StringBuilder("Did not receive LIA! ");
+      StringBuilder sb = new StringBuilder("Did not receive CMA! ");
       sb.append("Client ER:\n").append(clientNode.createErrorReport(this.clientNode.getErrors()));
 
       fail(sb.toString());

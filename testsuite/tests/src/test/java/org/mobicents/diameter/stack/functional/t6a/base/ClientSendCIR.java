@@ -1,30 +1,19 @@
 package org.mobicents.diameter.stack.functional.t6a.base;
 
-import org.jdiameter.api.*;
-import org.jdiameter.api.app.AppAnswerEvent;
-import org.jdiameter.api.app.AppRequestEvent;
-import org.jdiameter.api.app.AppSession;
+import org.jdiameter.api.Avp;
+import org.jdiameter.api.AvpSet;
+import org.jdiameter.api.IllegalDiameterStateException;
+import org.jdiameter.api.InternalException;
+import org.jdiameter.api.OverloadException;
+import org.jdiameter.api.RouteException;
 import org.jdiameter.api.t6a.ClientT6aSession;
-import org.jdiameter.api.t6a.ClientT6aSessionListener;
-import org.jdiameter.api.t6a.ServerT6aSession;
 import org.jdiameter.api.t6a.events.JConfigurationInformationAnswer;
 import org.jdiameter.api.t6a.events.JConfigurationInformationRequest;
-import org.jdiameter.api.t6a.events.JConnectionManagementAnswer;
-import org.jdiameter.api.t6a.events.JConnectionManagementRequest;
-import org.jdiameter.api.t6a.events.JMO_DataAnswer;
-import org.jdiameter.api.t6a.events.JMO_DataRequest;
-import org.jdiameter.api.t6a.events.JMT_DataAnswer;
-import org.jdiameter.api.t6a.events.JMT_DataRequest;
-import org.jdiameter.api.t6a.events.JReportingInformationAnswer;
-import org.jdiameter.api.t6a.events.JReportingInformationRequest;
 import org.jdiameter.common.impl.app.t6a.JConfigurationInformationRequestImpl;
-import org.jdiameter.common.impl.app.t6a.T6aSessionFactoryImpl;
-import org.mobicents.diameter.stack.functional.TBase;
 import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.t6a.AbstractClient;
 
 import static org.jdiameter.client.impl.helpers.Parameters.OwnDiameterURI;
-import static org.jdiameter.client.impl.helpers.Parameters.OwnIPAddress;
 
 /**
  * Created by Adi Enzel on 3/15/17.
@@ -94,7 +83,7 @@ public class ClientSendCIR extends AbstractClient {
   public void doConfigurationInformationAnswerEvent(ClientT6aSession session, JConfigurationInformationRequest request, JConfigurationInformationAnswer answer)
         throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
     if (this.receivedConfiguratinInfo) {
-      fail("S6t Received CIA more than once", null);
+      fail("T6a Received CIA more than once", null);
       return;
     }
 

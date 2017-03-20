@@ -40,7 +40,7 @@ public class ClientSendRIR extends AbstractClient {
   }
 
 
-  public void sendConfigurationInformationRequest() throws Exception {
+  public void sendReportingInformationRequest() throws Exception {
     JReportingInformationRequest request = new JReportingInformationRequestImpl(super.createRequest(this.clientT6aSession, JReportingInformationRequest.code));
     AvpSet reqSet = request.getMessage().getAvps();
 
@@ -70,7 +70,7 @@ public class ClientSendRIR extends AbstractClient {
 
     monitoringEventReport = reqSet.addGroupedAvp(Avp.MONITORING_EVENT_REPORT, getApplicationId().getVendorId(), true, false);
     monitoringEventReport.addAvp(Avp.SCEF_REFERENCE_ID, 2,getApplicationId().getVendorId(), true, false);
-    monitoringEventReport.addAvp(Avp.SCEF_ID, this.stack.getConfiguration().getStringValue(OwnDiameterURI.ordinal(), "aaa://172.123.124.125:5566"), getApplicationId().getVendorId(), true, false, false);
+    monitoringEventReport.addAvp(Avp.SCEF_ID, "aaa://172.123.124.125:5566", getApplicationId().getVendorId(), true, false, false);
     monitoringEventReport.addAvp(Avp.MONITORING_TYPE, MonitoringType.CHANGE_OF_IMSI_IMEI_ASSOCIATION, getApplicationId().getVendorId(), true, false, true);
     //    [ Reachability-Information ]
     //    [ EPS-Location-Information ]

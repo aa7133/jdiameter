@@ -16,7 +16,50 @@
 
 # Maven #
 #########
-target
+core/target
+core/jdiameter/target
+core/docs/jdocbook-restcomm/target/
+core/docs/sources-asciidoc/target/
+core/docs/sources-restcomm/target/
+core/docs/sources/target/
+core/docs/target/
+core/jdiameter-ha/api/target/
+core/jdiameter-ha/impl/target/
+core/jdiameter-ha/target/
+core/jdiameter/api/target/MANIFEST.MF
+core/jdiameter/api/target/checkstyle-checker.xml
+core/jdiameter/api/target/checkstyle-result.xml
+core/jdiameter/api/target/checkstyle-rules.xml
+core/jdiameter/api/target/classes/
+core/jdiameter/api/target/maven-archiver/
+core/jdiameter/impl/target/MANIFEST.MF
+core/jdiameter/impl/target/checkstyle-checker.xml
+core/jdiameter/impl/target/checkstyle-result.xml
+core/jdiameter/impl/target/checkstyle-rules.xml
+core/jdiameter/impl/target/classes/
+core/jdiameter/impl/target/maven-archiver/
+core/jdiameter/impl/target/surefire-reports/
+core/jdiameter/impl/target/test-classes/
+core/mux/jar/target/
+core/mux/sar-jboss-4/target/
+core/mux/sar-jboss-5/${env.JBOSS_HOME}/
+core/mux/sar-jboss-5/target/
+core/mux/sar-jboss-7/target/
+core/mux/target/
+examples/charging-server-simulator/target/
+examples/guide1/target/
+target/
+testsuite/load/container/target/
+testsuite/load/core/target/
+testsuite/target/
+testsuite/test-framework/target/
+testsuite/tests/127.0.0.1.0_127.0.0.111.3868_sctp.xml
+testsuite/tests/server-management-127.0.0.1.13868_sctp.xml
+testsuite/tests/server-management-127.0.0.111.3868_sctp.xml
+testsuite/tests/server-management-127.0.0.222.3868_sctp.xml
+testsuite/tests/target/
+
+
 
 # OS generated files #
 ######################

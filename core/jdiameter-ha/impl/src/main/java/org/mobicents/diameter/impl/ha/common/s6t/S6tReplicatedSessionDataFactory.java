@@ -9,7 +9,7 @@ import org.jdiameter.common.api.data.ISessionDatasource;
 import org.mobicents.cluster.MobicentsCluster;
 import org.mobicents.diameter.impl.ha.client.s6t.ClientS6tSessionDataReplicatedImpl;
 import org.mobicents.diameter.impl.ha.data.ReplicatedSessionDatasource;
-import org.mobicents.diameter.impl.ha.server.ServerS6tSessionDataReplicatedImpl;
+import org.mobicents.diameter.impl.ha.server.s6t.ServerS6tSessionDataReplicatedImpl;
 
 /**
  * Created by Adi Enzel on 3/12/17.
@@ -24,7 +24,7 @@ public class S6tReplicatedSessionDataFactory implements IAppSessionDataFactory<I
 
   /**
    *
-   * @param replicatedSessionDataSource
+   * @param replicatedSessionDataSource ISessionDatasource
    */
   public S6tReplicatedSessionDataFactory(ISessionDatasource replicatedSessionDataSource) { // Is this ok?
     super();
@@ -35,21 +35,18 @@ public class S6tReplicatedSessionDataFactory implements IAppSessionDataFactory<I
 
   /**
    *
-   * @param clazz
-   * @param sessionId
-   * @return
+   * @param clazz what class
+   * @param sessionId the session id of the request
+   * @return data container
    */
   @Override
   public IS6tSessionData getAppSessionData(Class<? extends AppSession> clazz, String sessionId) {
+    IS6tSessionData data = null;
     if (clazz.equals(ClientS6tSession.class)) {
-      ClientS6tSessionDataReplicatedImpl data =
-            new ClientS6tSessionDataReplicatedImpl(sessionId, this.mobicentsCluster, this.replicatedSessionDataSource.getContainer());
-      return data;
+      return new ClientS6tSessionDataReplicatedImpl(sessionId, this.mobicentsCluster, this.replicatedSessionDataSource.getContainer());
     }
     else if (clazz.equals(ServerS6tSession.class)) {
-      ServerS6tSessionDataReplicatedImpl data =
-            new ServerS6tSessionDataReplicatedImpl(sessionId, this.mobicentsCluster, this.replicatedSessionDataSource.getContainer());
-      return data;
+      return new ServerS6tSessionDataReplicatedImpl(sessionId, this.mobicentsCluster, this.replicatedSessionDataSource.getContainer());
     }
     throw new IllegalArgumentException();
   }

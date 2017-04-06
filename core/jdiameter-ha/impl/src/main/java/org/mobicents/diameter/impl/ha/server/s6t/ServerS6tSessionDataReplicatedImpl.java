@@ -1,7 +1,6 @@
-package org.mobicents.diameter.impl.ha.server;
+package org.mobicents.diameter.impl.ha.server.s6t;
 
 import org.jboss.cache.Fqn;
-
 import org.jdiameter.api.s6t.ServerS6tSession;
 import org.jdiameter.client.api.IContainer;
 import org.jdiameter.common.api.app.s6t.S6tSessionState;
@@ -19,9 +18,9 @@ public class ServerS6tSessionDataReplicatedImpl extends S6tSessionDataReplicated
 
   /**
    *
-   * @param nodeFqn
-   * @param mobicentsCluster
-   * @param container
+   * @param nodeFqn address FQDN
+   * @param mobicentsCluster cluster
+   * @param container container
    */
   public ServerS6tSessionDataReplicatedImpl(Fqn<?> nodeFqn, MobicentsCluster mobicentsCluster, IContainer container) {
     super(nodeFqn, mobicentsCluster, container);
@@ -34,9 +33,9 @@ public class ServerS6tSessionDataReplicatedImpl extends S6tSessionDataReplicated
 
   /**
    *
-   * @param sessionId
-   * @param mobicentsCluster
-   * @param container
+   * @param sessionId the session to save
+   * @param mobicentsCluster cluster
+   * @param container container
    */
   public ServerS6tSessionDataReplicatedImpl(String sessionId, MobicentsCluster mobicentsCluster, IContainer container) {
     this(Fqn.fromRelativeElements(ReplicatedSessionDatasource.SESSIONS_FQN, sessionId), mobicentsCluster, container);

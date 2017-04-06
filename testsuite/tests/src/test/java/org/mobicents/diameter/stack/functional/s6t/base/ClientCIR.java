@@ -122,6 +122,17 @@ public class ClientCIR extends AbstractClient{
 
   }
 
+  /**
+   * This method is called when answer to a request was received (CIA) by the client that sent the CIR
+   * and to handle all the parameters of the answer
+   * @param session the S6t client session
+   * @param request the original request that was sent by the application
+   * @param answer The recived answer to the request
+   * @throws InternalException exception
+   * @throws IllegalDiameterStateException exception
+   * @throws RouteException exception
+   * @throws OverloadException exception
+   */
   @Override
   public void doConfigurationInformationAnswerEvent(ClientS6tSession session, JConfigurationInformationRequest request, JConfigurationInformationAnswer answer)
           throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {

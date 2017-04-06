@@ -2408,19 +2408,19 @@ public interface Avp extends Wrapper, Serializable {
   int SERVICE_SELECTION = 493;
 
  /**
-   * S6t (3gpp TS 29-336) User-Identifier ::= <AVP header: 3102 10415>
+   * S6t (3gpp TS 29-336) User-Identifier ::= AVP header: 3102 10415
    */
   int USER_IDENTIFIER = 3102;
 
   /**
-   * S6t (3gpp ts 29-336) External-Identifier ::= <AVP header: 3111 10415>
+   * S6t (3gpp ts 29-336) External-Identifier ::= AVP header: 3111 10415
    */
   int EXTERNAL_IDENTIFIER = 3111;
 
   /**
    * S6t (3gpp ts 29-336) ESE-Communication-Pattern 3113 8.4.25 Grouped M,V
    */
-  int ESE_COMMUNICATION_PATTERN = 3113;
+  int AESE_COMMUNICATION_PATTERN = 3113;
 
   /**
    * S6t (3gpp ts 29-336) Communication-Pattern-Set 3114 8.4.26 Grouped M,V
@@ -2455,7 +2455,7 @@ public interface Avp extends Wrapper, Serializable {
   /**
    * S6t (3gpp ts 29-336) AESE-Communication-Pattern-Config-Status 3120 8.4.32 Grouped M,V
    */
-  int AESE_COMMUNICATION_PATTEREN_CONFIG_STATUS = 3120;
+  int AESE_COMMUNICATION_PATTERN_CONFIG_STATUS = 3120;
 
   /**
    * S6t (3gpp ts 29-336) AESE-Error-Report 3121 8.4.33 Grouped M,V
@@ -2727,7 +2727,29 @@ public interface Avp extends Wrapper, Serializable {
 
   int MAXIMUM_UE_AVAILABILITY_TIME = 3329;
 
+  /**
+   * TS-29.272 hss subscriber data S6a
+   */
 
+  int SUBSCRIPTION_DATA = 1400;
+
+  int SUBSCRIBER_STATUS = 1424;
+
+  int A_MSISDN = 1643;
+
+  int STN_SR = 1433;
+
+  int IMS_VOICE_OVER_PS_SESSIONS_SUPPORTED = 1492;
+
+  int LAST_UE_ACTIVITY_TIME = 1494;
+
+  int RAT_TYPE = 1032;
+
+  int IDA_FLAGS = 1441;
+
+  int EPS_USER_STATE = 1495;
+
+  int LOCAL_TIME_ZONE = 1649;
   /**
    * @return the AVP code.
    */

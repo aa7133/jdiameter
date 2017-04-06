@@ -172,7 +172,7 @@ public class ClientCIR extends AbstractClient{
             break;
           case Avp.MONITORING_EVENT_CONFIG_STATUS: //Grouped
             break;
-          case Avp.AESE_COMMUNICATION_PATTEREN_CONFIG_STATUS: // Grouped
+          case Avp.AESE_COMMUNICATION_PATTERN_CONFIG_STATUS: // Grouped
             break;
           case Avp.SUPPORTED_SERVICES: // Grouped
             break;

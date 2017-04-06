@@ -58,6 +58,7 @@ testsuite/tests/server-management-127.0.0.1.13868_sctp.xml
 testsuite/tests/server-management-127.0.0.111.3868_sctp.xml
 testsuite/tests/server-management-127.0.0.222.3868_sctp.xml
 testsuite/tests/target/
+hs_err_pid18377.log
 
 
 

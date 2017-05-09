@@ -129,13 +129,13 @@ public class ServerCIR extends AbstractServer {
       fail("Received Request with code not used by S6t!. Code[" + request.getCommandCode() + "]", null);
       return null;
     }
-    if (super.serverS6tSession != null) {
+    if (this.serverS6tSession != null) {
       // do fail?
       fail("Received Request in base listener, not in app specific!" + code, null);
     }
     else {
       try {
-        super.serverS6tSession = this.sessionFactory.getNewAppSession(request.getSessionId(), getApplicationId(), ServerS6tSession.class, (Object) null);
+        this.serverS6tSession = this.sessionFactory.getNewAppSession(request.getSessionId(), getApplicationId(), ServerS6tSession.class, (Object) null);
         ((NetworkReqListener) this.serverS6tSession).processRequest(request);
       }
       catch (Exception e) {

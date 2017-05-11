@@ -393,7 +393,11 @@ public class PeerImpl extends org.jdiameter.client.impl.controller.PeerImpl impl
           try {
             String destHost = destHostAvp.getDiameterIdentity();
             //FIXME: add check with DNS/names to check 127 vs localhost
-            if (destHost.equals(metaData.getLocalPeer().getUri().getFQDN())) {
+            String l = metaData.getLocalPeer().getUri().getFQDN();
+            String uri = metaData.getLocalPeer().getUri().toString();
+            //logger.info("Destination host = " + destHost + ", fqdn = " + l + ", The URI = " + uri) ;
+            //if (destHost.equals(metaData.getLocalPeer().getUri().getFQDN())) {
+            if (destHost.equals(metaData.getLocalPeer().getUri().toString())) {
 
               // this is for handling possible REDIRECT, destRealm != local.realm
               LocalAction action = null;

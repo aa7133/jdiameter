@@ -315,6 +315,8 @@ public class S6aServerSessionImpl extends S6aSession implements ServerS6aSession
       }
     }
     catch (Exception e) {
+      e.printStackTrace();
+      logger.error(e.toString());
       throw new InternalException(e);
     }
     finally {

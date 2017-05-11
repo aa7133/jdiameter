@@ -247,6 +247,8 @@ public class S6tServerSessionImpl extends S6tSession implements ServerS6tSession
       }
     }
     catch (Exception e) {
+      e.printStackTrace();
+      logger.error(e.toString());
       throw new InternalException(e);
     }
     finally {

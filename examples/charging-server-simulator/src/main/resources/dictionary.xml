@@ -8319,7 +8319,6 @@ TMPL specific AVPs (vendor id 35797)
       <avp name="Destination-Realm" code="283" vendor="0" multiplicity="1" index="-1" />
       <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="-1" />
       <avp name="Supported-Features" code="628" vendor="10415" multiplicity="0+" index="-1" />
-      <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="-1" />
       <avp name="OC-Supported-Features" code="621" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="NIDD-Authorization-Request" code="3150" vendor="10415" multiplicity="0-1" index="-1" />
       <avp name="Proxy-Info" code="284" vendor="0" multiplicity="0+" index="-1" />
@@ -8510,7 +8509,7 @@ TMPL specific AVPs (vendor id 35797)
     <command name="Connection-Management-Request" code="8388732" request="true">
       <avp name="Session-Id" code="263" vendor="0" multiplicity="1" index="0" />
       <avp name="User-Identifier" code="3102" vendor="10415" multiplicity="1" index="1" />
-      <avp name="Bearer-Identifier" code="3102" vendor="10415" multiplicity="1" index="2" />
+      <avp name="Bearer-Identifier" code="1020" vendor="10415" multiplicity="1" index="2" />
       <avp name="DRMP" code="301" vendor="0" multiplicity="0-1" index="-1" />
       <avp name="Auth-Session-State" code="277" vendor="0" multiplicity="1" index="-1" />
       <avp name="Origin-Host" code="264" vendor="0" multiplicity="1" index="-1" />

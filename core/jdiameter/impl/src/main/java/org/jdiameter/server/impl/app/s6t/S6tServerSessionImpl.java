@@ -336,6 +336,7 @@ public class S6tServerSessionImpl extends S6tSession implements ServerS6tSession
             break;
 
           default:
+            logger.info("RequestDelivery default command code = " + request.getCommandCode());
             listener.doOtherEvent(session, new AppRequestEventImpl(request), null);
             break;
         }
@@ -363,6 +364,7 @@ public class S6tServerSessionImpl extends S6tSession implements ServerS6tSession
             break;
 
           default:
+            logger.info("AnswerDelivery default command code = " + request.getCommandCode());
             listener.doOtherEvent(session, new AppRequestEventImpl(request), new AppAnswerEventImpl(answer));
             break;
         }

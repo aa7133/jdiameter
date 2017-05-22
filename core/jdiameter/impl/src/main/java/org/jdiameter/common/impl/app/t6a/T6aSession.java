@@ -14,6 +14,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *

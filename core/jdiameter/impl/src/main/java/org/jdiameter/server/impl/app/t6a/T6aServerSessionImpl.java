@@ -37,12 +37,14 @@ import org.jdiameter.common.impl.app.t6a.T6aSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *
- * @author <a href="mailto:aa71
-  void setT6aSessionState(T6aSessionState state);
-33@att.com"> Adi Enzel </a>
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public class T6aServerSessionImpl extends T6aSession implements ServerT6aSession, EventListener<Request, Answer>, NetworkReqListener {
   private static final Logger logger = LoggerFactory.getLogger(T6aServerSessionImpl.class);

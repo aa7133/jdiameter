@@ -32,6 +32,10 @@ import org.mobicents.diameter.stack.functional.TBase;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/15/17.
  *

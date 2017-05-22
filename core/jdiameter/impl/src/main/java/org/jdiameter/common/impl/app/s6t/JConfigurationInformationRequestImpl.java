@@ -5,6 +5,10 @@ import org.jdiameter.api.app.AppSession;
 import org.jdiameter.api.s6t.events.JConfigurationInformationRequest;
 import org.jdiameter.common.impl.app.AppRequestEventImpl;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/5/17.
  *

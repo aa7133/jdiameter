@@ -9,6 +9,10 @@ import org.jdiameter.common.api.app.t6a.IT6aSessionData;
 import org.jdiameter.server.impl.app.t6a.ServerT6aSessionDataLocalImpl;
 
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *

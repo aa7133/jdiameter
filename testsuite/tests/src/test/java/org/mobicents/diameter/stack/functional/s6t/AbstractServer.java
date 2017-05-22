@@ -25,9 +25,16 @@ import org.mobicents.diameter.stack.functional.TBase;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/6/17.
+ *
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
+
 public abstract class AbstractServer extends TBase implements ServerS6tSessionListener {
   protected ServerS6tSession serverS6tSession;
 

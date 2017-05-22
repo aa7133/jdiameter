@@ -6,9 +6,16 @@ import org.jdiameter.api.s6t.ClientS6tSessionListener;
 import org.jdiameter.api.s6t.ServerS6tSessionListener;
 import org.jdiameter.common.api.app.IAppSessionFactory;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/2/17.
+ *
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
+
 public interface IS6tSessionFactory extends IAppSessionFactory {
 
   /**

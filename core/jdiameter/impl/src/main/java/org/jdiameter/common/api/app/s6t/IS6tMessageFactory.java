@@ -9,8 +9,13 @@ import org.jdiameter.api.s6t.events.JReportingInformationRequest;
 import org.jdiameter.api.s6t.events.JNIDDInformationAnswer;
 import org.jdiameter.api.s6t.events.JNIDDInformationRequest;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/2/17.
+ *
  *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public interface IS6tMessageFactory {

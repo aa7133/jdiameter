@@ -16,6 +16,10 @@ import org.mobicents.diameter.stack.functional.t6a.AbstractClient;
 
 import static org.jdiameter.client.impl.helpers.Parameters.OwnDiameterURI;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/19/17.
  *

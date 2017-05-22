@@ -2,6 +2,10 @@ package org.jdiameter.client.impl.app.t6a;
 
 import org.jdiameter.common.impl.app.t6a.T6aLocalSessionDataImpl;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *

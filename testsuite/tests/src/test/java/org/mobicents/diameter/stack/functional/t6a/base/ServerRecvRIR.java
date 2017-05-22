@@ -23,6 +23,10 @@ import org.mobicents.diameter.stack.functional.t6a.AbstractServer;
 
 import java.io.InputStream;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/19/17.
  *

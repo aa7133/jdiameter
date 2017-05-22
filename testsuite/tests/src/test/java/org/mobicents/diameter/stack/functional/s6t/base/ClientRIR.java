@@ -22,6 +22,10 @@ import org.jdiameter.common.impl.app.s6t.S6tSessionFactoryImpl;
 import org.mobicents.diameter.stack.functional.Utils;
 import org.mobicents.diameter.stack.functional.s6t.AbstractClient;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/8/17.
  *

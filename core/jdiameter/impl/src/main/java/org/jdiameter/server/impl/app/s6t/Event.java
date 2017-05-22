@@ -4,8 +4,13 @@ import org.jdiameter.api.InternalException;
 import org.jdiameter.api.app.AppEvent;
 import org.jdiameter.api.app.StateEvent;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/5/17.
+ *
  *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public class Event implements StateEvent {

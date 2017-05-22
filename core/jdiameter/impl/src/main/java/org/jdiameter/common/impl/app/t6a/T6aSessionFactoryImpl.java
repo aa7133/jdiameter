@@ -41,6 +41,10 @@ import org.jdiameter.server.impl.app.t6a.T6aServerSessionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *

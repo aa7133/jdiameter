@@ -13,6 +13,10 @@ import org.jdiameter.api.t6a.events.JMT_DataRequest;
 import org.jdiameter.api.t6a.events.JReportingInformationAnswer;
 import org.jdiameter.api.t6a.events.JReportingInformationRequest;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *

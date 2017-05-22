@@ -24,6 +24,10 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/16/17.
  *

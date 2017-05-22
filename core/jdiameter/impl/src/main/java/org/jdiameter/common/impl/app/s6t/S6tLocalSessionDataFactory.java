@@ -8,6 +8,10 @@ import org.jdiameter.common.api.app.IAppSessionDataFactory;
 import org.jdiameter.common.api.app.s6t.IS6tSessionData;
 import org.jdiameter.server.impl.app.s6t.ServerS6tSessionDataLocalImpl;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/5/17.
  *

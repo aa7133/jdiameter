@@ -2,8 +2,13 @@ package org.jdiameter.common.api.app.s6t;
 
 import org.jdiameter.common.api.app.IAppSessionState;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/5/17.
+ *
  *  @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
 public enum S6tSessionState implements IAppSessionState<S6tSessionState> {

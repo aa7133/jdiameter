@@ -12,6 +12,10 @@ import org.jdiameter.api.s6t.events.JNIDDInformationRequest;
 import org.jdiameter.api.s6t.events.JReportingInformationAnswer;
 import org.jdiameter.api.s6t.events.JReportingInformationRequest;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/2/17.
  *

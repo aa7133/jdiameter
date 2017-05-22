@@ -15,6 +15,10 @@ import org.jdiameter.api.t6a.events.JConnectionManagementRequest;
 import org.jdiameter.api.t6a.events.JConnectionManagementAnswer;
 
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *

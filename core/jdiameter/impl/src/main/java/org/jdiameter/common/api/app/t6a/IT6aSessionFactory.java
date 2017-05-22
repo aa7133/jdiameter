@@ -6,6 +6,10 @@ import org.jdiameter.api.t6a.ClientT6aSessionListener;
 import org.jdiameter.api.t6a.ServerT6aSessionListener;
 import org.jdiameter.common.api.app.IAppSessionFactory;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/13/17.
  *

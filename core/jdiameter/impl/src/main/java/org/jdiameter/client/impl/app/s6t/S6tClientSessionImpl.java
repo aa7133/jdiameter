@@ -31,10 +31,16 @@ import org.jdiameter.common.impl.app.s6t.S6tSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/5/17.
  *
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
+
 public class S6tClientSessionImpl extends S6tSession implements ClientS6tSession, EventListener<Request, Answer>, NetworkReqListener {
   private static final Logger logger = LoggerFactory.getLogger(S6tClientSessionImpl.class);
 

@@ -10,9 +10,16 @@ import org.mobicents.diameter.stack.functional.s6t.AbstractClient;
 
 import static org.jdiameter.client.impl.helpers.Parameters.OwnDiameterURI;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 3/6/17.
+ *
+ * @author <a href="mailto:aa7133@att.com"> Adi Enzel </a>
  */
+
 public class ClientCIR extends AbstractClient{
   protected boolean receivedConfiguratinInfo;
   protected boolean sentConfigurationInfo;

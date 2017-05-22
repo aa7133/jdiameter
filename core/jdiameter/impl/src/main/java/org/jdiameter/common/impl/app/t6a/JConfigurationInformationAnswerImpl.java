@@ -5,6 +5,10 @@ import org.jdiameter.api.Request;
 import org.jdiameter.api.t6a.events.JConfigurationInformationAnswer;
 import org.jdiameter.common.impl.app.AppAnswerEventImpl;
 
+/*
+ * Copyright (c) 2017. AT&T Intellectual Property. All rights reserved
+ */
+
 /**
  * Created by Adi Enzel on 13/5/17.
  *
